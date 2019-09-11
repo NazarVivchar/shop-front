@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/simple-shop/static/css/main.2cce8147.chunk.css",
+    "main.js": "/simple-shop/static/js/main.3fe312b3.chunk.js",
+    "main.js.map": "/simple-shop/static/js/main.3fe312b3.chunk.js.map",
+    "runtime~main.js": "/simple-shop/static/js/runtime~main.fec26f5d.js",
+    "runtime~main.js.map": "/simple-shop/static/js/runtime~main.fec26f5d.js.map",
+    "static/js/2.095a5d90.chunk.js": "/simple-shop/static/js/2.095a5d90.chunk.js",
+    "static/js/2.095a5d90.chunk.js.map": "/simple-shop/static/js/2.095a5d90.chunk.js.map",
+    "index.html": "/simple-shop/index.html",
+    "precache-manifest.27d646835630c739b773f74506b1eb2d.js": "/simple-shop/precache-manifest.27d646835630c739b773f74506b1eb2d.js",
+    "service-worker.js": "/simple-shop/service-worker.js",
+    "static/css/main.2cce8147.chunk.css.map": "/simple-shop/static/css/main.2cce8147.chunk.css.map"
+  }
+}
