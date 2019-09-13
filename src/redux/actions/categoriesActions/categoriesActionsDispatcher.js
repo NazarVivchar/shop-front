@@ -1,6 +1,9 @@
 import axiosInstance from "../../../axiosInstance";
-import {getCategoriesSuccessAction} from "./categoriesActions";
+import {getCategoriesAction, getCategoriesSuccessAction} from "./categoriesActions";
 
-export const getCategories = () => dispatch => axiosInstance.get("/categories")
+export const getCategories = () => dispatch => {
+    dispatch(getCategoriesAction());
+    return axiosInstance.get("/categories")
     .then(response => response && dispatch(getCategoriesSuccessAction(response.data)))
     .catch();
+}
