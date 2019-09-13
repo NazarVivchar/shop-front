@@ -14,20 +14,19 @@ class ProductCard extends Component {
             <Grid
                 container
                 direction="column"
-                justify="space-between"
                 alignItems="center"
+                justify="space-between"
                 style={{
                     padding: theme.spacing(2),
                     margin: theme.spacing(0.5),
-
                 }}
                 className="product-container">
-                <Grid item style={{height: "60%"}}>
+                <Grid item style={{height: "40%"}}>
                     <img
                         src={`data:image/gif;base64,${product.image}`}
                         alt={`Image of ${product.name} was supposed to be here :(`}
                         align="middle"
-                        style={{height: "auto", width: "100%"}}/>
+                        style={{height: "100%", width: "auto"}}/>
                 </Grid>
                 <Grid item>
                     <Typography
@@ -35,12 +34,35 @@ class ProductCard extends Component {
                         variant="h6"
                         align="center"
                         style={{
-                            color: theme.palette.secondary.dark
+                            color: theme.palette.secondary.dark,
+                            height: "25%"
                         }}>
                         {product.name}
                     </Typography>
                 </Grid>
-                <Grid container justify="space-between">
+                <Grid
+                    item
+                    style={{
+                        height: "25%",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis"
+                    }}>
+                    <Typography
+                        gutterBottom
+                        align="center"
+                        style={{
+                            fontSize: "12px",
+                            color: theme.palette.primary.light,
+                        }}>
+                        {product.description}
+                    </Typography>
+                </Grid>
+                <Grid
+                    container
+                    justify="space-between"
+                    style={{
+                        height: "10%"
+                    }}>
                     <Grid item>
                         <Typography
                             variant="h6"
