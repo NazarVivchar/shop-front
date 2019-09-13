@@ -1,6 +1,6 @@
 import React from "react";
 import {Switch, Route, Redirect} from 'react-router-dom'
-import MainPage from "./pages/MainPage/MainPageContainer";
+import MainPage from "./pages/MainPage/MainPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function Routes() {

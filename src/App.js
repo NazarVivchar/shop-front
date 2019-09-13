@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import Layout from './Layout';
 import Routes from "./router";
 import {createBrowserHistory} from 'history';

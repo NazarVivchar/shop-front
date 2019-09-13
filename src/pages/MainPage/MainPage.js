@@ -1,14 +1,11 @@
 import React, {Component} from "react";
+import ProductsLayout from "../../components/ProductsLayout/ProductsLayoutContainer";
 
 class MainPage extends Component {
-    componentDidMount() {
-        this.props.loadData();
-    }
-
     render() {
         return (
-            <h1> Main Page</h1>
-        )
+            <ProductsLayout/>
+        );
     }
 }
 

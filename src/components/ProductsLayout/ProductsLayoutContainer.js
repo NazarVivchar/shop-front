@@ -1,6 +1,6 @@
 import {getProducts} from "../../redux/actions/productsActions/productsActionsDispatcher";
-import MainPage from "./MainPage";
 import {connect} from "react-redux";
+import ProductsLayout from "./ProductsLayout";
 
 const mapDispatchToProps = dispatch => {
     const loadData = () => {
@@ -15,4 +15,4 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsLayout);

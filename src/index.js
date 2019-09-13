@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import {Provider} from 'react-redux'
 import React from 'react';
@@ -17,7 +17,6 @@ ReactDOM.render((
                 </ThemeProvider>
             </Provider>
         </BrowserRouter>
-
     ),
     document.getElementById('root'));
 

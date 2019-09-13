@@ -21,7 +21,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "style-loader": "^1.0.0",
-    "history": "latest"
+    "history": "latest",
+    "mini-css-extract-plugin": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -56,7 +57,9 @@
     "@babel/register": "^7.6.0",
     "babel-register": "^6.26.0",
     "gh-pages": "^2.1.1",
-    "webpack": "^4.40.1",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0",
+    "webpack": "^4.40.2",
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.8.0"
   }
