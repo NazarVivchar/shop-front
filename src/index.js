@@ -7,13 +7,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 import store from "./redux/store/store";
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render((
-        <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <App/>
-            </ThemeProvider>
-        </Provider>
+        <BrowserRouter>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <App/>
+                </ThemeProvider>
+            </Provider>
+        </BrowserRouter>
+
     ),
     document.getElementById('root'));
 

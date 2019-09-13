@@ -3,11 +3,11 @@ export const productsActionTypes = {
   GET_PRODUCTS_SUCCESS: '[PRODUCTS] Successfully got all products',
 };
 
-export const getCategories = () => ({
+export const getProductsAction = () => ({
   type: productsActionTypes.GET_PRODUCTS,
 });
 
-export const getCategoriesSuccess = products => ({
+export const getProductsSuccessAction = products => ({
   type: productsActionTypes.GET_PRODUCTS_SUCCESS,
   payload: products,
 });

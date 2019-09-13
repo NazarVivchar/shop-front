@@ -9,6 +9,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles, useTheme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   drawerHeader: {

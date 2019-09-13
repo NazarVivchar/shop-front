@@ -3,11 +3,11 @@ export const categoriesActionTypes = {
   GET_CATEGORIES_SUCCESS: '[CATEGORIES] Successfully got all categories',
 };
 
-export const getCategories = () => ({
+export const getCategoriesAction = () => ({
   type: categoriesActionTypes.GET_CATEGORIES,
 });
 
-export const getCategoriesSuccess = categories => ({
+export const getCategoriesSuccessAction = categories => ({
   type: categoriesActionTypes.GET_CATEGORIES_SUCCESS,
   payload: categories,
 });

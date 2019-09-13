@@ -43,8 +43,10 @@ class Layout extends Component {
             onClick={this.handleOutsideDrawerClick}>
             <Header handleDrawerOpen={this.handleDrawerOpen} />
             <Container
+                maxWidth="xl"
               style={{ marginTop: theme.spacing(4) }}>
               <Paper>
+                {this.props.children}
                 <div style={{ height: '1000px' }} />
               </Paper>
             </Container>
