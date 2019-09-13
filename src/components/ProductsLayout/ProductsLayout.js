@@ -2,8 +2,20 @@ import Grid from "@material-ui/core/Grid";
 import React, {Component} from "react";
 import ProductCard from "../Product/ProductCard";
 import theme from "../../theme";
+import SimpleSelect from "../simpleSelect/SimpleSelect";
+import ProductList from "../Lists/ProductList";
+import {selectProductByCategory} from "../../selectors/productSelectors";
 
 class ProductsLayout extends Component {
+    state = {
+        selectedCategory: '0'
+    };
+    onCategoryChange = event => {
+        this.setState({
+            selectedCategory: event.target.value
+        })
+    };
+
     componentDidMount() {
         this.props.loadData();
     }
@@ -13,14 +25,29 @@ class ProductsLayout extends Component {
     }
 
     renderProducts() {
+        console.log(this.state.selectedCategory);
         return (
-            this.props.products.map(product => (
+            <>
+                <SimpleSelect
+                    label={'Категорія'}
+                    placeholder={'Усі'}
+                    selectedValue={this.state.selectedCategory}
+                    options={this.props.categories}
+                    handleChange={this.onCategoryChange}
+                />
                 <Grid
-                    key={product.id}
-                    item>
-                    <ProductCard product={product}/>
+                    container
+                    direction="column">
+                    <Grid item>
+
+                    </Grid>
+                    <Grid
+                        container
+                        style={{padding: ` 0 ${theme.spacing(2)}px`}}>
+                        {<ProductList products={selectProductByCategory(this.props.products, this.state.selectedCategory)}/>}
+                    </Grid>
                 </Grid>
-            ))
+            </>
         )
     }
 
@@ -30,14 +57,9 @@ class ProductsLayout extends Component {
 
     render() {
         return (
-            <Grid
-                container
-                justify="space-evenly"
-                style={{padding: ` 0 ${theme.spacing(2)}px`}}>
-                {this.areProductsAvailable()
-                    ? this.renderProducts()
-                    : this.renderUnavailableProducts()}
-            </Grid>
+            this.areProductsAvailable()
+                ? this.renderProducts()
+                : this.renderUnavailableProducts()
         )
     }
 }
