@@ -7,7 +7,7 @@ function productList(props) {
         <Grid
             container
             alignItems="stretch"
-            justify="space-evenly">
+            justify="flex-start">
             {props.products.map(product => (
                     <Grid item key={product.id}>
                         <ProductCard product={product}/>
