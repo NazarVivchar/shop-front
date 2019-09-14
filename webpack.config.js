@@ -10,7 +10,8 @@ const config = {
     // Output
     output: {
         path: path.resolve(__dirname, './client/dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: "/"
     },
     // Loaders
     module: {

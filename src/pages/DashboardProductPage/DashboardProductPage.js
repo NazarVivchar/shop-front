@@ -3,12 +3,18 @@ import SimpleSelect from "../../components/SimpleSelect/SimpleSelect";
 import Grid from "@material-ui/core/Grid";
 import theme from "../../theme";
 import ProductList from "../../components/Lists/ProductList/ProductListContainer";
+import {withTheme} from "@material-ui/styles";
+import AddIcon from "@material-ui/icons/Add"
+import CustomFab from "../../components/buttons/CustomFab/CustomFab";
+import ProductDialog from "../../components/dialogs/ProductDialog/ProductDialog";
 
-class MainPage extends Component {
+class DashboardProductPage extends Component {
     state = {
         selectedCategory: this.props.categoryOptions[0],
-        selectedOrder: this.props.orderOptions[0]
+        selectedOrder: this.props.orderOptions[0],
+        isAddingDialogOpened: false,
     };
+
 
     componentDidMount() {
         this.props.loadData();
@@ -34,6 +40,14 @@ class MainPage extends Component {
                 ...selectedOrder
             }
         })
+    };
+
+    handleAddingDialogOpen = () => {
+        this.setState({isAddingDialogOpened: true});
+    };
+
+    handleAddingDialogClose = () => {
+        this.setState({isAddingDialogOpened: false});
     };
 
     areProductsAvailable() {
@@ -67,16 +81,28 @@ class MainPage extends Component {
     }
 
     renderProducts() {
+        const {theme} = this.props;
         return (
-            <>
+            <Grid
+                container
+                direction="column"
+                style={{padding: ` 0 ${theme.spacing(2)}px`}}>
                 {this.renderSelects()}
-
-                {<ProductList
-                    selectedCategoryId={this.state.selectedCategory.id}
-                    sortingField={this.state.selectedOrder.field}
-                    sortingOrder={this.state.selectedOrder.order}
-                />}
-            </>
+                <Grid container>
+                    {<ProductList
+                        selectedCategoryId={this.state.selectedCategory.id}
+                        sortingField={this.state.selectedOrder.field}
+                        sortingOrder={this.state.selectedOrder.order}
+                    />}
+                </Grid>
+                <CustomFab onClick={this.handleAddingDialogOpen}>
+                    <AddIcon/>
+                </CustomFab>
+                <ProductDialog
+                    isOpened={this.state.isAddingDialogOpened}
+                    handleClose={this.handleAddingDialogClose}
+                />
+            </Grid>
         )
     }
 
@@ -93,4 +119,4 @@ class MainPage extends Component {
     }
 }
 
-export default MainPage;
+export default withTheme(DashboardProductPage);

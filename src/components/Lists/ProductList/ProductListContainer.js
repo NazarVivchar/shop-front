@@ -1,7 +1,7 @@
-import {getProducts} from "../../redux/actions/productsActions/productsActionsDispatcher";
+import {getProducts} from "../../../redux/actions/productsActions/productsActionsDispatcher";
 import {connect} from "react-redux";
 import ProductList from "./ProductList";
-import {orderProductsByName, orderProductsByPrice, selectProductsByCategory} from "../../selectors/productSelectors";
+import {orderProductsByName, orderProductsByPrice, selectProductsByCategory} from "../../../selectors/productSelectors";
 
 const mapDispatchToProps = dispatch => {
     const loadData = () => {

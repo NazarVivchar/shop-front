@@ -18,7 +18,7 @@ class ProductCard extends Component {
                 justify="space-between"
                 style={{
                     padding: theme.spacing(2),
-                    margin: theme.spacing(0.5),
+                    margin: theme.spacing(2),
                 }}
                 className="product-container">
                 <Grid item style={{height: "40%"}}>
