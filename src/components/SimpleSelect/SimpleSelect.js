@@ -7,7 +7,6 @@ import useTheme from "@material-ui/core/styles/useTheme";
 
 function SimpleSelect(props) {
     const theme = useTheme();
-
     return (
         <FormControl style={{
             margin: theme.spacing(1),
@@ -17,15 +16,12 @@ function SimpleSelect(props) {
                 {props.label}
             </InputLabel>
             <Select
-                value={props.selectedValue}
+                value={props.selected.id}
                 onChange={props.handleChange}
                 id="select"
                 displayEmpty
                 style={{marginTop: theme.spacing(2),}}
             >
-                <MenuItem value="0" style={{paddingLeft: theme.spacing(1)}}>
-                    {props.placeholder}
-                </MenuItem>
                 {props.options.map(option =>
                     <MenuItem
                         key={option.id}
