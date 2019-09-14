@@ -6,7 +6,8 @@ import ProductList from "../../components/Lists/ProductListContainer";
 
 class MainPage extends Component {
     state = {
-        selectedCategory: this.props.categoryOptions[0]
+        selectedCategory: this.props.categoryOptions[0],
+        selectedOrder: this.props.orderOptions[0]
     };
 
     componentDidMount() {
@@ -24,13 +25,28 @@ class MainPage extends Component {
         })
     };
 
+    onOrderChange = event => {
+        const selectedOrder = this.props.orderOptions
+            .find(option => option.id === event.target.value);
+
+        this.setState({
+            selectedOrder: {
+                ...selectedOrder
+            }
+        })
+    };
+
     areProductsAvailable() {
         return this.props.products && this.props.products.length;
     }
 
-    renderProducts() {
+    renderSelects() {
         return (
-            <>
+            <Grid
+                container
+                justify="flex-end"
+                alignItems="center"
+                style={{margin: `${theme.spacing(2)}px 0`}}>
                 {this.state && this.state.selectedCategory &&
                 <SimpleSelect
                     label={'Категорія'}
@@ -39,19 +55,32 @@ class MainPage extends Component {
                     options={this.props.categoryOptions}
                     handleChange={this.onCategoryChange}
                 />}
-                <Grid
-                    container
-                    direction="column">
-                    <Grid item>
+                {this.state && this.state.selectedOrder &&
+                <SimpleSelect
+                    label={'Сортування'}
+                    defaultOption={this.props.orderOptions[0]}
+                    selected={this.state.selectedOrder}
+                    options={this.props.orderOptions}
+                    handleChange={this.onOrderChange}
+                />}
+            </Grid>)
+    }
 
-                    </Grid>
-                    <Grid
-                        container
-                        style={{padding: ` 0 ${theme.spacing(2)}px`}}>
-                        {<ProductList selectedCategoryId={this.state.selectedCategory.id}/>}
-                    </Grid>
+    renderProducts() {
+        return (
+            <Grid
+                container
+                direction="column"
+                style={{padding: ` 0 ${theme.spacing(2)}px`}}>
+                {this.renderSelects()}
+                <Grid container>
+                    {<ProductList
+                        selectedCategoryId={this.state.selectedCategory.id}
+                        sortingField={this.state.selectedOrder.field}
+                        sortingOrder={this.state.selectedOrder.order}
+                    />}
                 </Grid>
-            </>
+            </Grid>
         )
     }
 

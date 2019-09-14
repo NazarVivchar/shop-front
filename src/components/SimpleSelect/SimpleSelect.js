@@ -10,7 +10,7 @@ function SimpleSelect(props) {
     return (
         <FormControl style={{
             margin: theme.spacing(1),
-            minWidth: 120,
+            minWidth: '200px',
         }}>
             <InputLabel shrink htmlFor="select">
                 {props.label}
