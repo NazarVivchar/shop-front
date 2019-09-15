@@ -9,36 +9,74 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
+import SimpleSelect from "../../SimpleSelect/SimpleSelect";
 
 class ProductDialog extends Component {
-    state = {
-        name: '',
-        description: '',
-        price: '',
-        image: '',
+    initialState = {
+        product: {
+            name: '',
+            description: '',
+            price: '',
+            image: '',
+            category: this.props.categories[0],
+        },
         imageName: '',
         shouldPriceShrink: false,
+    };
+
+    state = {
+        ...this.initialState
+    };
+
+    componentDidMount() {
+        this.props.loadData();
+    }
+
+    onCategoryChange = event => {
+        const selectedCategory = this.props.categories
+            .find(option => option.id === event.target.value);
+
+        this.setState({
+            product: {
+                ...this.state.product,
+                category: selectedCategory
+            },
+        })
     };
 
     handleChange = event => {
         const target = event.target;
         this.setState({
-            [target.name]: target.value
+            product: {
+                ...this.state.product,
+                [target.name]: target.value
+            }
         })
     };
 
     handleSubmit = () => {
-        console.log(this.state);
+        const product = this.state.product;
+        this.props.handleSubmit(product);
+        this.handleClose();
+    };
+    
+    handleClose = () => {
+        this.props.handleClose();
+        this.setState({
+            ...this.initialState,
+        });
     };
 
     handleFileChange = event => {
-        const fileReader  = new FileReader();
+        const fileReader = new FileReader();
         const imageName = event.target.files[0].name;
         fileReader.readAsDataURL(event.target.files[0]);
-        fileReader.onload =  event => {
-            console.log(event.target);
+        fileReader.onload = event => {
             this.setState({
-                image: event.target.result,
+                product: {
+                    ...this.state.product,
+                    image: event.target.result,
+                },
                 imageName
             })
         };
@@ -67,7 +105,7 @@ class ProductDialog extends Component {
                                   justify={"space-between"}
                                   style={{
                                       width: "400px",
-                                      height: "300px"
+                                      height: "300px",
                                   }}>
                                 <TextField
                                     type="text"
@@ -85,39 +123,59 @@ class ProductDialog extends Component {
                                 />
                                 <TextField
                                     type="number"
-                                    InputLabelProps={{ shrink: !!this.state.price || this.state.shouldPriceShrink}}
-                                    onFocus={() => {this.setState({shouldPriceShrink: true})}}
-                                    onBlur={() => {this.setState({shouldPriceShrink: false})}}
+                                    InputLabelProps={{shrink: !!this.state.product.price || this.state.shouldPriceShrink}}
+                                    onFocus={() => {
+                                        this.setState({shouldPriceShrink: true})
+                                    }}
+                                    onBlur={() => {
+                                        this.setState({shouldPriceShrink: false})
+                                    }}
                                     onChange={this.handleChange}
                                     value={this.state.price}
                                     name="price"
                                     label="Ціна"
+                                />
+                                <SimpleSelect
+                                    label={'Категорія'}
+                                    width="100%"
+                                    defaultOption={this.props.categories[0]}
+                                    selected={this.state.product.category}
+                                    options={this.props.categories}
+                                    handleChange={this.onCategoryChange}
                                 />
                                 <Button
                                     variant="outlined"
                                     color="primary"
                                     size="small"
                                     component="label">
-                                    Вибрати зображєння
+                                    Вибрати зображення
                                     <input
                                         type="file"
                                         accept="image/*"
-                                        style={{ display: "none" }}
+                                        style={{display: "none"}}
                                         onChange={this.handleFileChange}
                                     />
                                 </Button>
-                                { this.state.imageName &&
-                                <Typography
-                                variant="subtitle1">
-                                    Вибране зображення: {this.state.imageName}
-                                </Typography>}
+                                {this.state.imageName &&
+                                <div style={{
+                                    overflowX: "hidden",
+                                    whiteSpace: "nowrap",
+                                    textOverflow: "ellipsis",
+                                    width: "100%"
+                                }}>
+                                    <Typography
+                                        variant="subtitle1"
+                                        noWrap>
+                                        Вибране зображення: {this.state.imageName}
+                                    </Typography>
+                                </div>}
                             </Grid>
                         )}
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        onClick={this.props.handleClose}>
+                        onClick={this.handleClose}>
                         Скасувати
                     </Button>
                     <Button

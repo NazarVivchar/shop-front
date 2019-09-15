@@ -17,7 +17,7 @@ class productList extends Component {
                 justify="flex-start">
                 {this.props.products.map(product => (
                     <Grid item key={product.id}>
-                        <ProductCard product={product}/>
+                        <ProductCard showAdminControls = {this.props.isAdminList} product={product}/>
                     </Grid>
                 ))}
             </Grid>

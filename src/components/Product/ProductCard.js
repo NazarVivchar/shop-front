@@ -5,9 +5,44 @@ import useTheme from "@material-ui/core/styles/useTheme";
 import withTheme from "@material-ui/core/styles/withTheme";
 import Button from "@material-ui/core/Button";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever"
+import EditIcon from "@material-ui/icons/Create"
 import "./ProductCard.scss"
+import {red} from "@material-ui/core/colors";
 
 class ProductCard extends Component {
+    renderUserVariant() {
+        const {theme} = this.props;
+        return (
+            <Button variant="outlined" color="secondary" size="small">
+                <AddShoppingCartIcon style={{color: theme.palette.secondary.dark}}/>
+            </Button>
+        )
+    }
+
+    renderAdminVariant() {
+        const {theme} = this.props;
+        return (
+            <Grid container>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    style={{
+                        marginRight: theme.spacing(1)}}>
+                    <DeleteForeverIcon style={{color: "red"}}/>
+                </Button>
+                <Button
+                    variant="outlined"
+                    color="secondary"
+                    style={{
+                        marginLeft: theme.spacing(1)}}>
+                    <EditIcon style={{color: theme.palette.secondary.dark}}/>
+                </Button>
+            </Grid>
+        )
+    }
+
+
     render() {
         const {product, theme} = this.props;
         return (
@@ -71,9 +106,9 @@ class ProductCard extends Component {
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Button variant="outlined" color="secondary" size="small">
-                            <AddShoppingCartIcon style={{color: theme.palette.secondary.dark}}/>
-                        </Button>
+                        {this.props.showAdminControls
+                            ? this.renderAdminVariant()
+                            : this.renderUserVariant()}
                     </Grid>
                 </Grid>
             </Grid>

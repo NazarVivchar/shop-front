@@ -9,8 +9,7 @@ function SimpleSelect(props) {
     const theme = useTheme();
     return (
         <FormControl style={{
-            margin: theme.spacing(1),
-            minWidth: '200px',
+            width: props.width
         }}>
             <InputLabel shrink htmlFor="select">
                 {props.label}
@@ -34,4 +33,7 @@ function SimpleSelect(props) {
     )
 }
 
+SimpleSelect.defaultProps = {
+    width: "200px"
+};
 export default SimpleSelect;

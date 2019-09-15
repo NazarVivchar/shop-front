@@ -6,7 +6,7 @@ import ProductList from "../../components/Lists/ProductList/ProductListContainer
 import {withTheme} from "@material-ui/styles";
 import AddIcon from "@material-ui/icons/Add"
 import CustomFab from "../../components/buttons/CustomFab/CustomFab";
-import ProductDialog from "../../components/dialogs/ProductDialog/ProductDialog";
+import ProductDialog from "../../components/dialogs/ProductDialog/AddingProductDialogContainer";
 
 class DashboardProductPage extends Component {
     state = {
@@ -62,21 +62,27 @@ class DashboardProductPage extends Component {
                 alignItems="center"
                 style={{margin: `${theme.spacing(2)}px 0`}}>
                 {this.state && this.state.selectedCategory &&
-                <SimpleSelect
-                    label={'Категорія'}
-                    defaultOption={this.props.categoryOptions[0]}
-                    selected={this.state.selectedCategory}
-                    options={this.props.categoryOptions}
-                    handleChange={this.onCategoryChange}
-                />}
+                <div style={{margin: this.props.theme.spacing(1)}}>
+                    <SimpleSelect
+                        label={'Категорія'}
+                        defaultOption={this.props.categoryOptions[0]}
+                        selected={this.state.selectedCategory}
+                        options={this.props.categoryOptions}
+                        handleChange={this.onCategoryChange}
+                    />
+                </div>
+                }
                 {this.state && this.state.selectedOrder &&
-                <SimpleSelect
-                    label={'Сортування'}
-                    defaultOption={this.props.orderOptions[0]}
-                    selected={this.state.selectedOrder}
-                    options={this.props.orderOptions}
-                    handleChange={this.onOrderChange}
-                />}
+                <div style={{margin: this.props.theme.spacing(1)}}>
+                    <SimpleSelect
+                        label={'Сортування'}
+                        defaultOption={this.props.orderOptions[0]}
+                        selected={this.state.selectedOrder}
+                        options={this.props.orderOptions}
+                        handleChange={this.onOrderChange}
+                    />
+                </div>
+                }
             </Grid>)
     }
 
@@ -93,6 +99,7 @@ class DashboardProductPage extends Component {
                         selectedCategoryId={this.state.selectedCategory.id}
                         sortingField={this.state.selectedOrder.field}
                         sortingOrder={this.state.selectedOrder.order}
+                        isAdminList
                     />}
                 </Grid>
                 <CustomFab onClick={this.handleAddingDialogOpen}>

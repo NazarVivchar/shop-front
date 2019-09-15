@@ -3,6 +3,7 @@ import SimpleSelect from "../../components/SimpleSelect/SimpleSelect";
 import Grid from "@material-ui/core/Grid";
 import theme from "../../theme";
 import ProductList from "../../components/Lists/ProductList/ProductListContainer";
+import withTheme from "@material-ui/core/styles/withTheme";
 
 class MainPage extends Component {
     state = {
@@ -48,21 +49,27 @@ class MainPage extends Component {
                 alignItems="center"
                 style={{margin: `${theme.spacing(2)}px 0`}}>
                 {this.state && this.state.selectedCategory &&
-                <SimpleSelect
-                    label={'Категорія'}
-                    defaultOption={this.props.categoryOptions[0]}
-                    selected={this.state.selectedCategory}
-                    options={this.props.categoryOptions}
-                    handleChange={this.onCategoryChange}
-                />}
+                <div style={{margin: this.props.theme.spacing(1)}}>
+                    <SimpleSelect
+                        label={'Категорія'}
+                        defaultOption={this.props.categoryOptions[0]}
+                        selected={this.state.selectedCategory}
+                        options={this.props.categoryOptions}
+                        handleChange={this.onCategoryChange}
+                    />
+                </div>
+                }
                 {this.state && this.state.selectedOrder &&
-                <SimpleSelect
-                    label={'Сортування'}
-                    defaultOption={this.props.orderOptions[0]}
-                    selected={this.state.selectedOrder}
-                    options={this.props.orderOptions}
-                    handleChange={this.onOrderChange}
-                />}
+                <div style={{margin: this.props.theme.spacing(1)}}>
+                    <SimpleSelect
+                        label={'Сортування'}
+                        defaultOption={this.props.orderOptions[0]}
+                        selected={this.state.selectedOrder}
+                        options={this.props.orderOptions}
+                        handleChange={this.onOrderChange}
+                    />
+                </div>
+                }
             </Grid>)
     }
 
@@ -93,4 +100,4 @@ class MainPage extends Component {
     }
 }
 
-export default MainPage;
+export default withTheme(MainPage);
