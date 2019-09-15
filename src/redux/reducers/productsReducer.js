@@ -28,6 +28,14 @@ export default function productsReducer(state = initialState, action) {
                 ]
             };
 
+        case productsActionTypes.UPDATE_PRODUCT_SUCCESS:
+            return {
+                ...state,
+                products: [
+                    ...state.products.map(product => product.id === action.payload.id ? action.payload : product),
+                ]
+            };
+
         default:
             return state;
     }

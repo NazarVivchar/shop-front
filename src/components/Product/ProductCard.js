@@ -1,16 +1,31 @@
 import React, {Component} from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import useTheme from "@material-ui/core/styles/useTheme";
 import withTheme from "@material-ui/core/styles/withTheme";
 import Button from "@material-ui/core/Button";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever"
 import EditIcon from "@material-ui/icons/Create"
 import "./ProductCard.scss"
-import {red} from "@material-ui/core/colors";
+import ProductDialog from "../dialogs/ProductDialog/EditingProductDialogContainer";
 
 class ProductCard extends Component {
+    state = {
+        isEditingDialogOpened: false
+    };
+
+    handleEditingDialogOpen =() => {
+        this.setState({
+            isEditingDialogOpened: true
+    })
+    };
+
+    handleEditingDialogClose =() => {
+        this.setState({
+            isEditingDialogOpened: false
+        })
+    };
+
     renderUserVariant() {
         const {theme} = this.props;
         return (
@@ -23,22 +38,31 @@ class ProductCard extends Component {
     renderAdminVariant() {
         const {theme} = this.props;
         return (
-            <Grid container>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    style={{
-                        marginRight: theme.spacing(1)}}>
-                    <DeleteForeverIcon style={{color: "red"}}/>
-                </Button>
-                <Button
-                    variant="outlined"
-                    color="secondary"
-                    style={{
-                        marginLeft: theme.spacing(1)}}>
-                    <EditIcon style={{color: theme.palette.secondary.dark}}/>
-                </Button>
-            </Grid>
+            <>
+                <Grid container>
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        style={{
+                            marginRight: theme.spacing(1)
+                        }}>
+                        <DeleteForeverIcon style={{color: "red"}}/>
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        onClick={this.handleEditingDialogOpen}
+                        style={{
+                            marginLeft: theme.spacing(1)
+                        }}>
+                        <EditIcon style={{color: theme.palette.secondary.dark}}/>
+                    </Button>
+                </Grid>
+                <ProductDialog
+                    product={this.props.product}
+                    isOpened={this.state.isEditingDialogOpened}
+                    handleClose={this.handleEditingDialogClose}/>
+            </>
         )
     }
 

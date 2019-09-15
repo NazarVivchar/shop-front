@@ -12,20 +12,10 @@ import Typography from "@material-ui/core/Typography";
 import SimpleSelect from "../../SimpleSelect/SimpleSelect";
 
 class ProductDialog extends Component {
-    initialState = {
-        product: {
-            name: '',
-            description: '',
-            price: '',
-            image: '',
-            category: this.props.categories[0],
-        },
-        imageName: '',
-        shouldPriceShrink: false,
-    };
+
 
     state = {
-        ...this.initialState
+        ...this.props.initialState
     };
 
     componentDidMount() {
@@ -110,14 +100,14 @@ class ProductDialog extends Component {
                                 <TextField
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.name}
+                                    value={this.state.product.name}
                                     name="name"
                                     label="Назва"
                                 />
                                 <TextField
                                     type="text"
                                     onChange={this.handleChange}
-                                    value={this.state.description}
+                                    value={this.state.product.description}
                                     name="description"
                                     label="Опис"
                                 />
@@ -131,7 +121,7 @@ class ProductDialog extends Component {
                                         this.setState({shouldPriceShrink: false})
                                     }}
                                     onChange={this.handleChange}
-                                    value={this.state.price}
+                                    value={this.state.product.price}
                                     name="price"
                                     label="Ціна"
                                 />
@@ -148,7 +138,7 @@ class ProductDialog extends Component {
                                     color="primary"
                                     size="small"
                                     component="label">
-                                    Вибрати зображення
+                                    {this.props.chooseImageText}
                                     <input
                                         type="file"
                                         accept="image/*"

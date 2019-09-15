@@ -1,13 +1,17 @@
 import {connect} from "react-redux";
 import ProductDialog from "./ProductDialog";
-import {saveProduct} from "../../../redux/actions/productsActions/productsActionsDispatcher";
+import {
+    getProducts,
+    updateProduct
+} from "../../../redux/actions/productsActions/productsActionsDispatcher";
 import {getCategories} from "../../../redux/actions/categoriesActions/categoriesActionsDispatcher";
 
 const mapDispatchToProps = dispatch => {
     const loadData = () => {
         dispatch(getCategories());
+        dispatch(getProducts());
     };
-    const handleSubmit = product => dispatch(saveProduct(product));
+    const handleSubmit = product => dispatch(updateProduct(product));
 
     return {
         loadData,
@@ -16,20 +20,22 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = (state, ownProps) => {
+    const {product} = ownProps;
+
     return {
         categories: state.categoriesData.categories,
         initialState: {
             product: {
-                name: '',
-                description: '',
-                price: '',
-                image: '',
-                category:  state.categoriesData.categories[0],
+                name: product.name,
+                description: product.description,
+                price: product.price,
+                image: product.image,
+                category: product.category,
             },
             imageName: '',
             shouldPriceShrink: false,
         },
-        chooseImageText: "Виберіть зображення"
+        chooseImageText: "Виберіть нове зображення"
     }
 };
 
