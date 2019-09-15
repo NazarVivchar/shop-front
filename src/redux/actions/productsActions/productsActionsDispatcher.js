@@ -1,5 +1,6 @@
 import axiosInstance from "../../../axiosInstance";
 import {
+    deleteProductSuccessAction,
     getProductsAction,
     getProductsSuccessAction,
     saveProductSuccessAction,
@@ -20,5 +21,10 @@ export const saveProduct = product => dispatch => {
 
 export const updateProduct = product => dispatch => {
     axiosInstance.put(`/products/${product.id}`, product).then(response => response && dispatch(updateProductSuccessAction(response.data)))
+        .catch();
+};
+
+export const deleteProduct = id => dispatch => {
+    axiosInstance.delete(`/products/${id}`).then(response => response && dispatch(deleteProductSuccessAction(id)))
         .catch();
 };

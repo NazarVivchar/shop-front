@@ -8,10 +8,12 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever"
 import EditIcon from "@material-ui/icons/Create"
 import "./ProductCard.scss"
 import ProductDialog from "../dialogs/ProductDialog/EditingProductDialogContainer";
+import ConfirmDialog from "../dialogs/ConfirmDialog/ConfirmDialog";
 
 class ProductCard extends Component {
     state = {
-        isEditingDialogOpened: false
+        isEditingDialogOpened: false,
+        isDeletingDialogOpened: false,
     };
 
     handleEditingDialogOpen =() => {
@@ -23,6 +25,18 @@ class ProductCard extends Component {
     handleEditingDialogClose =() => {
         this.setState({
             isEditingDialogOpened: false
+        })
+    };
+
+    handleDeletingDialogOpen =() => {
+        this.setState({
+            isDeletingDialogOpened: true
+        })
+    };
+
+    handleDeletingDialogClose =() => {
+        this.setState({
+            isDeletingDialogOpened: false
         })
     };
 
@@ -43,6 +57,7 @@ class ProductCard extends Component {
                     <Button
                         variant="outlined"
                         color="primary"
+                        onClick={this.handleDeletingDialogOpen}
                         style={{
                             marginRight: theme.spacing(1)
                         }}>
@@ -62,6 +77,14 @@ class ProductCard extends Component {
                     product={this.props.product}
                     isOpened={this.state.isEditingDialogOpened}
                     handleClose={this.handleEditingDialogClose}/>
+                    <ConfirmDialog
+                        messageText="Ви впевнені, що хочете видалити цей продукт?"
+                        mainButtonText="Видалити"
+                        isOpened={this.state.isDeletingDialogOpened}
+                        handleClose={this.handleDeletingDialogClose}
+                        handleConfirm={this.props.handleDelete}
+                    />
+
             </>
         )
     }

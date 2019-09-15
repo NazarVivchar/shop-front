@@ -36,6 +36,14 @@ export default function productsReducer(state = initialState, action) {
                 ]
             };
 
+      case productsActionTypes.DELETE_PRODUCT_SUCCESS:
+        return {
+          ...state,
+          products: [
+            ...state.products.filter(product => product.id !== action.payload),
+          ]
+        };
+
         default:
             return state;
     }
