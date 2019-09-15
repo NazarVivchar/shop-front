@@ -26,6 +26,7 @@ const mapStateToProps = (state, ownProps) => {
         categories: state.categoriesData.categories,
         initialState: {
             product: {
+                id: product.id,
                 name: product.name,
                 description: product.description,
                 price: product.price,

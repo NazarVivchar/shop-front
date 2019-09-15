@@ -19,6 +19,6 @@ export const saveProduct = product => dispatch => {
 };
 
 export const updateProduct = product => dispatch => {
-    axiosInstance.put("/products", product).then(response => response && dispatch(updateProductSuccessAction(response.data)))
+    axiosInstance.put(`/products/${product.id}`, product).then(response => response && dispatch(updateProductSuccessAction(response.data)))
         .catch();
 };
