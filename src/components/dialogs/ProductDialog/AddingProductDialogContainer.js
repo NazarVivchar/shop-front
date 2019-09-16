@@ -16,19 +16,22 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-        categories: state.categoriesData.categories,
-        initialState: {
-            product: {
-                name: '',
-                description: '',
-                price: '',
-                image: '',
-                category:  state.categoriesData.categories[0],
-            },
-            imageName: '',
-            shouldPriceShrink: false,
+    const categories = state.categoriesData.categories;
+    const initialState = {
+        product: {
+            name: '',
+            description: '',
+            price: '',
+            image: '',
+            category: {id: 0},
         },
+        imageName: '',
+        shouldPriceShrink: false,
+    };
+
+    return {
+        categories: categories,
+        initialState: initialState,
         chooseImageText: "Виберіть зображення"
     }
 };

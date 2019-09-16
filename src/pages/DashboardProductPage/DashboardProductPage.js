@@ -50,10 +50,6 @@ class DashboardProductPage extends Component {
         this.setState({isAddingDialogOpened: false});
     };
 
-    areProductsAvailable() {
-        return this.props.products && this.props.products.length;
-    }
-
     renderSelects() {
         return (
             <Grid
@@ -86,7 +82,7 @@ class DashboardProductPage extends Component {
             </Grid>)
     }
 
-    renderProducts() {
+    render() {
         const {theme} = this.props;
         return (
             <Grid
@@ -110,18 +106,6 @@ class DashboardProductPage extends Component {
                     handleClose={this.handleAddingDialogClose}
                 />
             </Grid>
-        )
-    }
-
-    renderUnavailableProducts() {
-        return <h1>No products are available</h1>
-    }
-
-    render() {
-        return (
-            this.areProductsAvailable()
-                ? this.renderProducts()
-                : this.renderUnavailableProducts()
         )
     }
 }

@@ -21,7 +21,6 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = (state, ownProps) => {
     const {product} = ownProps;
-
     return {
         categories: state.categoriesData.categories,
         initialState: {

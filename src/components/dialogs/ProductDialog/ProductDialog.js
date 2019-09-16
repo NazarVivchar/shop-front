@@ -7,16 +7,17 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
-import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import SimpleSelect from "../../SimpleSelect/SimpleSelect";
 
 class ProductDialog extends Component {
-
-
     state = {
         ...this.props.initialState
     };
+
+    resetState() {
+        this.setState({...this.props.initialState})
+    }
 
     componentDidMount() {
         this.props.loadData();
@@ -47,14 +48,12 @@ class ProductDialog extends Component {
     handleSubmit = () => {
         const product = this.state.product;
         this.props.handleSubmit(product);
-        this.handleClose();
-    };
-    
-    handleClose = () => {
         this.props.handleClose();
-        this.setState({
-            ...this.initialState,
-        });
+    };
+
+    handleClose = () => {
+        this.resetState();
+        this.props.handleClose();
     };
 
     handleFileChange = event => {
@@ -76,18 +75,12 @@ class ProductDialog extends Component {
         return (
             <Dialog
                 open={this.props.isOpened}
-                onClose={this.props.handleClose}>
+                onClose={this.handleClose}>
                 <DialogTitle>
                     Товар
                 </DialogTitle>
                 <DialogContent>
                     <Formik
-                        onSubmit={(values, actions) => {
-                            setTimeout(() => {
-                                alert(JSON.stringify(values, null, 2));
-                                actions.setSubmitting(false);
-                            }, 1000);
-                        }}
                         render={props => (
                             <Grid container
                                   direction="column"
@@ -128,8 +121,8 @@ class ProductDialog extends Component {
                                 <SimpleSelect
                                     label={'Категорія'}
                                     width="100%"
-                                    defaultOption={this.props.categories[0]}
-                                    selected={this.state.product.category}
+                                    placeholder={{id: 0, name: "Виберіть значення"}}
+                                    selected={this.state.product.category || {id: 0}}
                                     options={this.props.categories}
                                     handleChange={this.onCategoryChange}
                                 />
@@ -169,6 +162,7 @@ class ProductDialog extends Component {
                         Скасувати
                     </Button>
                     <Button
+                        disabled={this.state.product.category.id===0}
                         color="secondary"
                         onClick={this.handleSubmit}>
                         Зберегти

@@ -41,7 +41,7 @@ class Layout extends Component {
                     style={{marginTop: theme.spacing(4)}}
                     onClick={this.handleOutsideDrawerClick}>
                     <Paper
-                        style={{padding: theme.spacing(4)}}>
+                        style={{padding: theme.spacing(2)}}>
                         {this.props.children}
                         <div style={{height: '1000px'}}/>
                     </Paper>

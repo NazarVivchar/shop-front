@@ -4,6 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import React from "react";
 import useTheme from "@material-ui/core/styles/useTheme";
+import Input from "@material-ui/core/Input";
 
 function SimpleSelect(props) {
     const theme = useTheme();
@@ -18,9 +19,14 @@ function SimpleSelect(props) {
                 value={props.selected.id}
                 onChange={props.handleChange}
                 id="select"
-                displayEmpty
                 style={{marginTop: theme.spacing(2),}}
+                input={<Input id="select" />}
             >
+                {props.placeholder && <MenuItem
+                    value={props.placeholder.id}
+                    style={{paddingLeft: theme.spacing(1)}}>
+                    {props.placeholder.name}
+                </MenuItem>}
                 {props.options.map(option =>
                     <MenuItem
                         key={option.id}
