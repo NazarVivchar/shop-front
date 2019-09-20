@@ -87,8 +87,7 @@ class DashboardProductPage extends Component {
         return (
             <Grid
                 container
-                direction="column"
-                style={{padding: ` 0 ${theme.spacing(2)}px`}}>
+                direction="column">
                 {this.renderSelects()}
                 <Grid container>
                     {<ProductList

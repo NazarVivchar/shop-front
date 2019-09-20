@@ -13,8 +13,9 @@ class productList extends Component {
         return (
             <Grid
                 container
-                alignItems="stretch"
-                justify="flex-start">
+                alignItems="center"
+                justify="space-evenly"
+            >
                 {this.props.products.map(product => (
                     <Grid item key={product.id}>
                         <ProductCard showAdminControls = {this.props.isAdminList} product={product}/>

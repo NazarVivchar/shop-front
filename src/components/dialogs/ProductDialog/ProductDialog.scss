@@ -1,0 +1,12 @@
+.dialog {
+  @media(min-width: 768px) {
+    width: 400px !important;
+    height: 600px !important;
+
+  }
+
+  @media(max-width: 768px) {
+    height: 600px !important;
+
+  }
+}

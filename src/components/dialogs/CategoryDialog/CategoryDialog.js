@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import withTheme from "@material-ui/core/styles/withTheme";
 
 class CategoryDialog extends Component {
     state = {
@@ -45,10 +46,13 @@ class CategoryDialog extends Component {
     };
 
     render() {
+        const {theme} = this.props;
+
         return (
             <Dialog
                 open={this.props.isOpened}
-                onClose={this.handleClose}>
+                onClose={this.handleClose}
+                PaperProps={{style: {margin: theme.spacing(2)}}}>
                 <DialogTitle>
                     Товар
                 </DialogTitle>
@@ -59,10 +63,7 @@ class CategoryDialog extends Component {
                                   direction="column"
                                   alignItems={"stretch"}
                                   justify={"space-between"}
-                                  style={{
-                                      width: "400px",
-                                      height: "80px",
-                                  }}>
+                                  className="dialog">
                                 <TextField
                                     type="text"
                                     onChange={this.handleChange}
@@ -90,4 +91,4 @@ class CategoryDialog extends Component {
     }
 }
 
-export default CategoryDialog;
+export default withTheme(CategoryDialog);

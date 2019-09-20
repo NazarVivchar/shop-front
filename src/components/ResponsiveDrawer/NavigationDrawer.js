@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function ResponsiveDrawer(props) {
+function NavigationDrawer(props) {
   const theme = useTheme();
 
   return (
@@ -33,7 +33,7 @@ function ResponsiveDrawer(props) {
         alignItems="center"
         justify="flex-end">
         <IconButton onClick={props.handleDrawerClose}>
-          <ChevronLeftIcon />
+          <ChevronLeftIcon fontSize="large"/>
         </IconButton>
       </Grid>
       <Divider />
@@ -57,9 +57,9 @@ function ResponsiveDrawer(props) {
   );
 }
 
-ResponsiveDrawer.propTypes = {
+NavigationDrawer.propTypes = {
   isDrawerOpened: PropTypes.bool.isRequired,
   handleDrawerClose: PropTypes.func.isRequired,
 };
 
-export default ResponsiveDrawer;
+export default NavigationDrawer;

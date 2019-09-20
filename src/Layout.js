@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import {Grid} from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import withTheme from '@material-ui/core/styles/withTheme';
-import Header from './components/header/Header';
-import ResponsiveDrawer from './components/ResponsiveDrawer/ResponsiveDrawer';
+import Header from './components/header/HeaderContainer';
+import NavigationDrawer from './components/ResponsiveDrawer/NavigationDrawer';
 
 class Layout extends Component {
     constructor(props) {
@@ -32,12 +31,11 @@ class Layout extends Component {
         const {theme} = this.props;
         return (
             <div style={{background: theme.palette.background.light}}>
-                <ResponsiveDrawer
+                <NavigationDrawer
                     isDrawerOpened={this.state.isDrawerOpened}
                     handleDrawerClose={this.handleDrawerClose}/>
                 <Header handleDrawerOpen={this.handleDrawerOpen}/>
-                <Container
-                    maxWidth="xl"
+                <div
                     style={{marginTop: theme.spacing(4)}}
                     onClick={this.handleOutsideDrawerClick}>
                     <Paper
@@ -45,7 +43,7 @@ class Layout extends Component {
                         {this.props.children}
                         <div style={{height: '1000px'}}/>
                     </Paper>
-                </Container>
+                </div>
             </div>
         );
     }

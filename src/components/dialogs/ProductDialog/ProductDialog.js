@@ -9,6 +9,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import SimpleSelect from "../../SimpleSelect/SimpleSelect";
+import withTheme from "@material-ui/core/styles/withTheme";
 
 class ProductDialog extends Component {
     state = {
@@ -72,10 +73,13 @@ class ProductDialog extends Component {
     };
 
     render() {
+        const {theme} = this.props;
+
         return (
             <Dialog
                 open={this.props.isOpened}
-                onClose={this.handleClose}>
+                onClose={this.handleClose}
+                PaperProps={{style: {margin: theme.spacing(2)}}}>
                 <DialogTitle>
                     Товар
                 </DialogTitle>
@@ -86,10 +90,7 @@ class ProductDialog extends Component {
                                   direction="column"
                                   alignItems={"stretch"}
                                   justify={"space-between"}
-                                  style={{
-                                      width: "400px",
-                                      height: "300px",
-                                  }}>
+                                  className="dialog">
                                 <TextField
                                     type="text"
                                     onChange={this.handleChange}
@@ -173,4 +174,4 @@ class ProductDialog extends Component {
     }
 }
 
-export default ProductDialog;
+export default withTheme(ProductDialog);

@@ -23,7 +23,9 @@
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
-    "style-loader": "^1.0.0"
+    "style-loader": "^1.0.0",
+    "yup": "^0.27.0",
+    "Yup": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
