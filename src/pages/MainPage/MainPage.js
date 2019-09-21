@@ -8,7 +8,8 @@ import withTheme from "@material-ui/core/styles/withTheme";
 class MainPage extends Component {
     state = {
         selectedCategory: this.props.categoryOptions[0],
-        selectedOrder: this.props.orderOptions[0]
+        selectedOrder: this.props.orderOptions[0],
+        isWrongRoleMessageDisplayed: false,
     };
 
     componentDidMount() {

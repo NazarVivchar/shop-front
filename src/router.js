@@ -4,11 +4,12 @@ import MainPage from "./pages/MainPage/MainPageContainer";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import DashboardProductPage from "./pages/DashboardProductPage/DashboardProductPage";
+import withAuthorization from "./AuthorizationHOC";
 
 const Routes = () => {
     return (
         <Switch>
-            <Route path="/dashboard" component={DashboardPage} />
+            <Route path="/dashboard" render={() => withAuthorization(DashboardPage, ['ROLE_ADMIN'])} />
                 <Route exact path={"/dashboard/p"} component={DashboardProductPage}/>
             <Route path="/main-page" component={MainPage}/>
             <Redirect exact from="/" to="/main-page"/>
