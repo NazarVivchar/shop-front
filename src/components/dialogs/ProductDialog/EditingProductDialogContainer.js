@@ -11,7 +11,10 @@ const mapDispatchToProps = dispatch => {
         dispatch(getCategories());
         dispatch(getProducts());
     };
-    const handleSubmit = product => dispatch(updateProduct(product));
+    const handleSubmit = product => {
+        dispatch(updateProduct({
+            ...product,
+        }))};
 
     return {
         loadData,
@@ -26,9 +29,6 @@ const mapStateToProps = (state, ownProps) => {
         initialState: {
             product: {
                 id: product.id,
-                name: product.name,
-                description: product.description,
-                price: product.price,
                 image: product.image,
                 category: product.category,
             },
