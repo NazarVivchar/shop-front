@@ -3,24 +3,22 @@ import UserDialog from "./UserDialog";
 import {registerUser} from "../../../redux/actions/userActions/userActionsDispatcher";
 
 const mapDispatchToProps = dispatch => {
-    const handleSubmit = user => dispatch(registerUser(user));
+    const handleSubmit = values => dispatch(registerUser(
+        {
+            username: values.username,
+            password: values.password,
+            name: values.name,
+            surname: values.surname
+        }
+    ));
 
     return {
         handleSubmit
     }
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = () => {
     return {
-        initialState: {
-            user: {
-                username: "",
-                password: "",
-                passwordRepeat: "",
-                name: "",
-                surname: "",
-            },
-        },
         dialogTitle: "Реєстрація",
         confirmButtonText: "Зареєструватися",
         suggestionText: "Уже зареєстровані?",

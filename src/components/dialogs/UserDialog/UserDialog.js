@@ -13,197 +13,164 @@ import Typography from "@material-ui/core/Typography";
 import * as Yup from "Yup";
 
 class UserDialog extends Component {
-    state = {
-        ...this.props.initialState
-    };
 
-    resetState() {
-        this.setState({
-            ...this.props.initialState
-        })
+    renderTextField(type, label, autoComplete) {
+        return function ({field, name, value, onChange, onBlur}) {
+            return (
+                <TextField
+                    {...field}
+                    {...name}
+                    {...value}
+                    {...onBlur}
+                    {...onChange}
+                    autoComplete={autoComplete}
+                    type={type}
+                    label={label}
+                />
+            )
+        }
     }
 
-    handleChange = event => {
-        const target = event.target;
-        this.setState({
-            user: {
-                ...this.state.user,
-                [target.name]: target.value
-            }
-        })
-    };
+    renderErrorMessage(errors, touched, name) {
+        return (
+            <Typography
+                color="error">
+                {errors[name] && touched[name] && errors[name]}
+                &nbsp;
+            </Typography>
+        )
+    }
 
-    handleSubmit = () => {
-        const user = this.state.user;
-        this.props.handleSubmit(user);
-        this.props.handleClose();
-    };
-
-    handleClose = () => {
-        this.props.handleClose();
-        this.resetState();
-    };
-
-    renderAdditionalInputs() {
+    renderPasswordRepeatInput(errors, touched) {
         return (
             <>
-                <TextField
-                    type="text"
-                    onChange={this.handleChange}
-                    value={this.state.passwordRepeat}
-                    name="passwordRepeat"
-                    label="Пароль ще раз"
-                />
-                <TextField
-                    type="text"
-                    onChange={this.handleChange}
-                    value={this.state.name}
-                    name="name"
-                    label="Ім'я"
-                />
-                <TextField
-                    type="text"
-                    onChange={this.handleChange}
-                    value={this.state.surname}
-                    name="surname"
-                    label="Прізвище"
-                />
+                <Field name="passwordRepeat"
+                       render={this.renderTextField("password", "Пароль ще раз", "new-password")}/>
+                {this.renderErrorMessage(errors, touched, "passwordRepeat")}
+            </>
+        )
+    }
+
+    renderNameSurnameInputs(errors, touched) {
+        return (
+            <>
+                <Field name="name"
+                       render={this.renderTextField("text", "Ім'я", "name")}/>
+                {this.renderErrorMessage(errors, touched, "name")}
+                <Field name="surname"
+                       render={this.renderTextField("text", "Прізвище", "surname")}/>
+                {this.renderErrorMessage(errors, touched, "surname")}
             </>
         )
     }
 
     render() {
+        const {theme} = this.props;
+        const {isRegisterForm} = this.props;
 
-        const SignupSchema = Yup.object().shape({
-            firstName: Yup.string()
-                .min(2, 'Too Short!')
-                .max(50, 'Too Long!')
-                .required('Required'),
-            lastName: Yup.string()
-                .min(2, 'Too Short!')
-                .max(50, 'Too Long!')
-                .required('Required'),
-            email: Yup.string()
-                .email('Invalid email')
-                .required('Required'),
+        const ValidationSchema = Yup.object().shape({
+            name: Yup.string()
+                .when('$isRegisterForm', (isRegisterForm, schema) => (
+                    isRegisterForm
+                        ? schema.required('Це поле обов\'язкове')
+                        : schema)),
+            surname: Yup.string()
+                .when('$isRegisterForm', (isRegisterForm, schema) => (
+                    isRegisterForm
+                        ? schema.required('Це поле обов\'язкове')
+                        : schema)),
+            username: Yup.string()
+                .email('Неправильна адреса')
+                .required('Це поле обов\'язкове'),
+            password: Yup.string()
+                .min(8, 'Надто короткий пароль')
+                .required('Це поле обов\'язкове'),
+            passwordRepeat: Yup.string()
+                .test('passwords-match',
+                    'Паролі не збігаються',
+                    function (value) {
+                        return this.parent.password === value || !isRegisterForm;
+                    })
+                .when('$isRegisterForm', (isRegisterForm, schema) => (
+                    isRegisterForm
+                        ? schema
+                            .required('Це поле обов\'язкове')
+                        : schema)),
         });
         return (
-            <div>
-                <h1>Signup</h1>
-                <Formik
-                    initialValues={{
-                        firstName: '',
-                        lastName: '',
-                        email: '',
-                    }}
-                    validationSchema={SignupSchema}
-                    onSubmit={values => {
-                        // same shape as initial values
-                        console.log(values);
-                    }}
-                >
-                    {({errors, touched}) => (
-                        <Form>
-                            <Field name="firstName"
-                                   render={({field, name, value, onChange, onBlur }) => (
-                                       <TextField
-                                           {...field}
-                                           {...name}
-                                           {...value}
-                                           {...onBlur}
-                                           {...onChange}
-                                           type="text"
-                                           // onChange={this.handleChange}
-                                           // value={this.state.surname}
-                                           // name="surname"
-                                           label="Прізвище"
-                                       />
-                                   )}/>
-                            {errors.firstName && touched.firstName ? (
-                                <div>{errors.firstName}</div>
-                            ) : null}
-                            <Field name="lastName"/>
-                            {errors.lastName && touched.lastName ? (
-                                <div>{errors.lastName}</div>
-                            ) : null}
-                            <Field name="email" type="email"/>
-                            {errors.email && touched.email ? <div>{errors.email}</div> : null}
-                            <button type="submit">Submit</button>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
+            <Dialog
+                open={this.props.isOpened}
+                onClose={this.props.handleClose}
+                PaperProps={{style: {margin: theme.spacing(2)}}}>
+                <DialogTitle>
+                    <Typography
+                        align="center"
+                        style={{
+                            marginTop: theme.spacing(5),
+                            fontSize: "30px"
+                        }}>
+                        {this.props.dialogTitle}
+                    </Typography>
+                </DialogTitle>
+                <DialogContent>
+                    <Formik
+                        initialValues={{
+                            username: '',
+                            password: '',
+                            passwordRepeat: "",
+                            name: "",
+                            surname: ""
+                        }}
+                        validationSchema={ValidationSchema}
+                        onSubmit={values => {
+                            this.props.handleSubmit(values);
+                            this.props.handleClose();
+                        }}
+                    >
+                        {({errors, touched}) => (
+                            <Form
+                                context={{isRegisterForm: this.props.isRegisterForm}}>
+                                <Grid container
+                                      direction="column"
+                                      alignItems={"stretch"}
+                                      justify="space-around"
+                                      className="dialog"
+                                      style={{height: this.props.isRegisterForm ? "400px" : "200px"}}>
+                                    <Field name="username"
+                                           render={this.renderTextField("text", "Ел. пошта", "email")}/>
+                                    {this.renderErrorMessage(errors, touched, "username")}
+                                    {this.props.isRegisterForm && this.renderNameSurnameInputs(errors, touched)}
+                                    <Field name="password"
+                                           render={this.renderTextField("password", "Пароль", isRegisterForm? "new-password": "current-password")}/>
+                                    {this.renderErrorMessage(errors, touched, "password")}
+                                    {this.props.isRegisterForm && this.renderPasswordRepeatInput(errors, touched)}
+                                    <Button
+                                        color="secondary"
+                                        onClick={this.props.handleFormSwap}>
+                                        <Typography
+                                            align="center">
+                                            {this.props.suggestionText}
+                                        </Typography>
+                                    </Button>
+                                </Grid>
+                                < DialogActions>
+                                    < Button
+                                        onClick={this.props.handleClose}>
+                                        Скасувати
+                                    </Button>
+                                    <Button
+                                        color="secondary"
+                                        type="submit">
+                                        {this.props.confirmButtonText}
+                                    </Button>
+                                </DialogActions>
+                            </Form>
+                        )}
+                    </Formik>
+                </DialogContent>
+            </Dialog>
         )
     }
-
-    // render() {
-    //     const {theme} = this.props;
-    //     return (
-    //         <Dialog
-    //             open={this.props.isOpened}
-    //             onClose={this.handleClose}
-    //             PaperProps={{style: {margin: theme.spacing(2)}}}>
-    //             <DialogTitle>
-    //                 <Typography
-    //                     align="center"
-    //                     style={{
-    //                         marginTop: theme.spacing(5),
-    //                         fontSize: "30px"
-    //                     }}>
-    //                     {this.props.dialogTitle}
-    //                 </Typography>
-    //             </DialogTitle>
-    //             <DialogContent>
-    //                 <Formik
-    //                     render={props => (
-    //                         <Grid container
-    //                               direction="column"
-    //                               alignItems={"stretch"}
-    //                               justify="space-around"
-    //                               className="dialog"
-    //                               style={{height: this.props.isRegisterForm ? "400px": "250px"}}>
-    //                             <TextField
-    //                                 type="text"
-    //                                 onChange={this.handleChange}
-    //                                 value={this.state.username}
-    //                                 name="username"
-    //                                 label="Ел. пошта"
-    //                             />
-    //                             <TextField
-    //                                 type="text"
-    //                                 onChange={this.handleChange}
-    //                                 value={this.state.password}
-    //                                 name="password"
-    //                                 label="Пароль"
-    //                             />
-    //                             {this.props.isRegisterForm && this.renderAdditionalInputs()}
-    //                             <Button
-    //                                 color="secondary"
-    //                                 onClick={this.props.handleFormSwap}>
-    //                                 <Typography
-    //                                     align="center">
-    //                                     {this.props.suggestionText}
-    //                                 </Typography>
-    //                             </Button>
-    //                         </Grid>
-    //                     )}
-    //                 />
-    //
-    //             </DialogContent>
-    //             < DialogActions>
-    //                 < Button
-    //                     onClick={this.handleClose}>
-    //                     Скасувати
-    //                 </Button>
-    //                 <Button
-    //                     color="secondary"
-    //                     onClick={this.handleSubmit}>
-    //                     {this.props.confirmButtonText}
-    //                 </Button>
-    //             </DialogActions>
-    //         </Dialog>
-    //     )
-    // }
 }
 
 export default withTheme(UserDialog);
