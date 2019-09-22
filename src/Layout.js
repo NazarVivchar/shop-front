@@ -30,18 +30,23 @@ class Layout extends Component {
     render() {
         const {theme} = this.props;
         return (
-            <div style={{background: theme.palette.background.light}}>
+            <div style={{
+                background: theme.palette.background.light,
+                minHeight: "100vh"
+            }}>
                 <NavigationDrawer
                     isDrawerOpened={this.state.isDrawerOpened}
                     handleDrawerClose={this.handleDrawerClose}/>
-                <Header handleDrawerOpen={this.handleDrawerOpen}/>
-                <div
-                    style={{marginTop: theme.spacing(4)}}
-                    onClick={this.handleOutsideDrawerClick}>
+                <Header
+                    handleDrawerOpen={this.handleDrawerOpen}/>
+                <div onClick={this.handleOutsideDrawerClick}>
                     <Paper
-                        style={{padding: theme.spacing(2)}}>
+                        style={{
+                            margin: `0 ${theme.spacing(3)}px`,
+                            minHeight: "700px",
+                            padding: theme.spacing(2)
+                        }}>
                         {this.props.children}
-                        <div style={{height: '1000px'}}/>
                     </Paper>
                 </div>
             </div>

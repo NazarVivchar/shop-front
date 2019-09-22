@@ -85,7 +85,7 @@ function NavigationDrawer(props) {
                         }}>
                             <Typography
                                 align="center"
-                                variant="h5">
+                                variant="h6">
                                 {icon}
                             </Typography>
                         </Grid>
@@ -93,7 +93,7 @@ function NavigationDrawer(props) {
                             <Typography
                                 gutterBottom
                                 align="center"
-                                variant="h5">
+                                variant="h6">
                                 {text}
 
                             </Typography>
