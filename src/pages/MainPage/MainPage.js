@@ -38,6 +38,10 @@ class MainPage extends Component {
         })
     };
 
+    addProductToOrder = product => {
+        this.props.addProductToOrder(product);
+    };
+
     areProductsAvailable() {
         return this.props.products && this.props.products.length;
     }

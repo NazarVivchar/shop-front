@@ -11,12 +11,9 @@ function Paginator(props)
 {
 
     const {numberOfElements, step, theme, selectedPage} = props;
-    console.log(numberOfElements);
-    console.log(step);
         const controls = [];
         let index = 1;
         for (let i = 0; i < numberOfElements; i += step) {
-            console.log(i);
             controls.push(
                 <Button
                     key={index}

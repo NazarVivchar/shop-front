@@ -18,9 +18,7 @@ class ShoppingCartDialog extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.isUserLogged !== this.props.isUserLogged) {
-            console.log("updated");
             this.props.loadData();
-
         }
     }
 

@@ -6,7 +6,6 @@ const initialState = {
     isLogged: false,
 };
 export default function userReducer(state = initialState, action) {
-    console.log(initialState);
     switch (action.type) {
         case userActionTypes.LOG_IN_USER_SUCCESS:
             return {

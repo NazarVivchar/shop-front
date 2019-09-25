@@ -31,13 +31,13 @@ class OrderedProductCard extends Component {
                         {this.props.product.name}
                     </Typography>
                 </Grid>
-                <Grid item>
-                    <Typography
-                        gutterBottom
-                        align="center">
-                        Кількість: {this.props.amount}
-                    </Typography>
-                </Grid>
+                {/*<Grid item>*/}
+                {/*    <Typography*/}
+                {/*        gutterBottom*/}
+                {/*        align="center">*/}
+                {/*        Кількість: {this.props.amount}*/}
+                {/*    </Typography>*/}
+                {/*</Grid>*/}
                 <Grid item>
                     <Button
                         variant="outlined"

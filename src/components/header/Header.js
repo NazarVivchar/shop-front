@@ -70,7 +70,6 @@ class Header extends Component {
 
     render() {
         const {theme} = this.props;
-        console.log(this.props.numberOfOrderedProducts);
         return (
             <>
                 <Grid

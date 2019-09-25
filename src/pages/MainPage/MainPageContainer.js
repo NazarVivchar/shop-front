@@ -2,12 +2,15 @@ import {connect} from "react-redux";
 import {getCategories} from "../../redux/actions/categoriesActions/categoriesActionsDispatcher";
 import MainPage from "./MainPage";
 import {getProducts} from "../../redux/actions/productsActions/productsActionsDispatcher";
+import {updateUserOrder} from "../../redux/actions/userOrderActions/userOrderActionsDispatcher";
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     const loadData = () => {
         dispatch(getCategories());
         dispatch(getProducts());
     };
+
+
 
     return {loadData}
 };
@@ -16,6 +19,7 @@ const mapStateToProps = state => {
     return {
         categories: state.categoriesData.categories,
         products: state.productsData.products,
+
         categoryOptions: [
             {
                 id: 0,
@@ -46,6 +50,7 @@ const mapStateToProps = state => {
                 order: 1
             }
         ]
-    }};
+    }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

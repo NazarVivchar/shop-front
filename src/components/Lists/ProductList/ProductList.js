@@ -41,7 +41,7 @@ class productList extends Component {
                         .slice((this.state.selectedPage - 1) * this.state.step, this.state.selectedPage * this.state.step)
                         .map(product => (
                             <Grid item key={product.id}>
-                                <ProductCard showAdminControls={this.props.isAdminList} product={product}/>
+                                <ProductCard showAdminControls={this.props.isAdminList} product={product} addToOrder={this.props.addProductToOrder}/>
                             </Grid>
                         ))}
                 </Grid>

@@ -20,6 +20,18 @@ export default function userOrderReducer(state = initialState, action) {
                 isLoading: false,
             };
 
+        case userOrderActionTypes.CREATE_USER_ORDER:
+            return {
+                ...state,
+                userOrder: action.payload,
+            };
+
+        case userOrderActionTypes.UPDATE_USER_ORDER:
+            return {
+                ...state,
+                userOrder: action.payload,
+            };
+
         default:
             return state;
     }

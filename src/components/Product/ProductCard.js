@@ -40,10 +40,15 @@ class ProductCard extends Component {
         })
     };
 
+    addToOrder = () => {
+        console.log(this.props.order);
+        this.props.addToOrder(this.props.order);
+    };
+
     renderUserVariant() {
         const {theme} = this.props;
         return (
-            <Button variant="outlined" color="secondary" size="small">
+            <Button variant="outlined" color="secondary" size="small" onClick={this.addToOrder}>
                 <AddShoppingCartIcon style={{color: theme.palette.secondary.dark}}/>
             </Button>
         )
