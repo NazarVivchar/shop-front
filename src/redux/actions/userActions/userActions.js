@@ -5,9 +5,9 @@ export const userActionTypes = {
     IS_USER_LOGGED: '[USER] Checking if user is logged',
 };
 
-export const logInUserSuccessAction = user => ({
+export const logInUserSuccessAction = username => ({
     type: userActionTypes.LOG_IN_USER_SUCCESS,
-    payload: user.name
+    payload: username
 });
 
 export const registerUserSuccessAction = user => ({

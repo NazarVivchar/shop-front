@@ -5,11 +5,12 @@ import {
     logOutUserSuccessAction,
     registerUserSuccessAction
 } from "./userActions";
+import {getUsernameFromToken} from "../../../utils/userUtils";
 
 export const logInUser = user => dispatch => {
     axiosInstance.post("/login", user).then(response => {
         if (response) {
-            dispatch(logInUserSuccessAction(response.data));
+            dispatch(logInUserSuccessAction(getUsernameFromToken(response.headers["authorization"])));
             localStorage.setItem("Token", response.headers["authorization"]);
         }
     })

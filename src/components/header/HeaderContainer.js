@@ -12,6 +12,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         isUserLogged: state.userData.isLogged,
+        userOrder:  state.userOrderData.userOrder
     }
 };
 

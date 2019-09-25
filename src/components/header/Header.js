@@ -11,11 +11,15 @@ import Grid from '@material-ui/core/Grid';
 import withTheme from "@material-ui/core/styles/withTheme";
 import LoginUserDialog from "../dialogs/UserDialog/LoginUserDialog";
 import RegisterUserDialog from "../dialogs/UserDialog/RegisterUserDialog";
+import ShoppingCartDialog from "../dialogs/ShoppingCartDialog/ShoppingCartDialogContainer";
+import ShoppingCartIcon from "@material-ui/icons/shoppingCart"
+import {Badge} from "@material-ui/core";
 
 class Header extends Component {
     state = {
         isLoginDialogOpened: false,
-        isRegisterDialogOpened: false
+        isRegisterDialogOpened: false,
+        isShoppingCartDialogOpened: false,
     };
     swapForms = () => {
         this.setState(prevState => ({
@@ -34,6 +38,7 @@ class Header extends Component {
         })
     };
 
+
     handleLoginDialogClose = () => {
         this.setState({
             isLoginDialogOpened: false
@@ -46,8 +51,26 @@ class Header extends Component {
         })
     };
 
+    handleShoppingCartDialogOpen = () => {
+        this.setState({
+            isShoppingCartDialogOpened: true
+        })
+    };
+
+    handleShoppingCartDialogClose = () => {
+        this.setState({
+            isShoppingCartDialogOpened: false
+        })
+    };
+
+    getNumberOfOrderedProducts() {
+        const {userOrder} = this.props;
+        return userOrder && userOrder.find(userOrder => userOrder.status === "inProgress").orderedProducts.length
+    }
+
     render() {
         const {theme} = this.props;
+        console.log(this.props.numberOfOrderedProducts);
         return (
             <>
                 <Grid
@@ -72,15 +95,16 @@ class Header extends Component {
                             container
                             alignItems="center"
                             justify="space-between"
-                            style={{margin: `0 ${theme.spacing(2)}`}}>
-                            <Grid item xs={11}>
+                            style={{margin: `0 ${theme.spacing(1)}`}}>
+                            <Grid item xs={7}>
                                 <Grid
                                     container
                                     alignItems="center"
                                     justify="flex-start">
                                     <IconButton
                                         color="inherit"
-                                        onClick={this.props.handleDrawerOpen}>
+                                        onClick={this.props.handleDrawerOpen}
+                                        style={{padding: 0}}>
                                         <MenuIcon fontSize="large"/>
                                     </IconButton>
                                     <Typography
@@ -90,11 +114,22 @@ class Header extends Component {
                                 </Grid>
 
                             </Grid>
-                            <Grid item xs={1}>
-                                <Grid
-                                    container
-                                    alignItems="center"
-                                    justify="center">
+                            <Grid item xs={5}>
+                                <Grid container justify="flex-end">
+                                    {this.props.isUserLogged &&
+
+                                    <IconButton
+                                        color="inherit"
+                                        onClick={this.handleShoppingCartDialogOpen}>
+                                        <Badge
+                                            color="secondary"
+                                            badgeContent={this.getNumberOfOrderedProducts()}
+                                            style={{margin: theme.spacing(2)}}>
+                                            <ShoppingCartIcon fontSize="large"/>
+                                        </Badge>
+                                    </IconButton>
+                                    }
+
                                     {this.props.isUserLogged
                                         ? <IconButton
                                             color="inherit"
@@ -122,6 +157,12 @@ class Header extends Component {
                     handleClose={this.handleRegisterDialogClose}
                     handleFormSwap={this.swapForms}
                 />
+                {this.props.isUserLogged &&
+                <ShoppingCartDialog
+                    isOpened={this.state.isShoppingCartDialogOpened}
+                    handleClose={this.handleShoppingCartDialogClose}
+                />
+                }
             </>
         );
     }
