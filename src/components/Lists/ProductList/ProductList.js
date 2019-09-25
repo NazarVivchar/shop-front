@@ -36,7 +36,7 @@ class productList extends Component {
                     container
                     alignItems="center"
                     justify="center"
-                >
+                    style={{minHeight: "60vh"}}>
                     {this.props.products
                         .slice((this.state.selectedPage - 1) * this.state.step, this.state.selectedPage * this.state.step)
                         .map(product => (

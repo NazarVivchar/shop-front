@@ -7,6 +7,10 @@ import withTheme from "@material-ui/core/styles/withTheme";
 import Grid from "@material-ui/core/Grid";
 import CloseIcon from "@material-ui/icons/close"
 import IconButton from "@material-ui/core/IconButton";
+import theme from "../../../theme";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 
 class ShoppingCartDialog extends Component {
@@ -22,7 +26,51 @@ class ShoppingCartDialog extends Component {
         }
     }
 
+    placeOrder = order => () =>{
+        this.props.placeOrder(this.props.username, order);
+        this.props.handleClose();
+    };
+
+    cancelOrder = order => () => {
+        this.props.cancelOrder(this.props.username, order);
+        this.props.handleClose();
+    };
+
+    getOrderedProductsFromOrder(order) {
+        return order && order.orderedProducts;
+    };
+
+    renderDialogActions() {
+        const {userOrder} = this.props;
+        const foundUserOrder = userOrder && userOrder.find(userOrder => userOrder.status === "inProgress");
+
+        return (
+        <Grid container justify="center" alignItems="center" >
+            <Button
+                variant="outlined"
+                color="secondary"
+                size="medium"
+                onClick={this.placeOrder(foundUserOrder)}
+                style={{marginRight: theme.spacing(1)}}>
+                Замовити
+            </Button>
+            <Button
+                variant="outlined"
+                color="primary"
+                size="medium"
+                onClick={this.cancelOrder(foundUserOrder)}
+                style={{marginLeft: theme.spacing(1)}}>
+                <Typography style={{color: "red"}}>
+                    Очистити
+                </Typography>
+            </Button>
+        </Grid>
+    )
+    }
+
     renderDialog() {
+        const {userOrder} = this.props;
+        const foundUserOrder = userOrder && userOrder.find(userOrder => userOrder.status === "inProgress");
 
         return (
             <Dialog
@@ -30,19 +78,28 @@ class ShoppingCartDialog extends Component {
                 onClose={this.props.handleClose}
                 fullWidth
                 maxWidth="lg"
+                scroll="paper"
                 fullScreen={window.screen.width < 500}>
-                <DialogTitle>
-                    <Grid container alignItems="center" justify="space-between">
-                        Корзина
+                <DialogTitle
+                    style={{background: theme.palette.primary.main}}>
+                    <Grid
+                        container
+                        alignItems="center"
+                        justify="space-between"
+                        style={{color: "white"}}>
+                        Кошик
                         <IconButton onClick={this.props.handleClose}>
-                            <CloseIcon/>
+                            <CloseIcon style={{color: "white"}}/>
                         </IconButton>
                     </Grid>
                 </DialogTitle>
-                <DialogContent>
-                        <OrderedProductsList
-                            orderedProducts={this.props.userOrder.find(userOrder => userOrder.status === "inProgress").orderedProducts}/>
+                <DialogContent style={{minHeight: "400px"}}>
+                    <OrderedProductsList
+                        orderedProducts={this.getOrderedProductsFromOrder(foundUserOrder)}/>
                 </DialogContent>
+                <DialogActions style={{height: "50px"}}>
+                    {foundUserOrder && this.renderDialogActions()}
+                </DialogActions>
             </Dialog>
         )
     }

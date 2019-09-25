@@ -33,9 +33,9 @@ class CategoryList extends Component {
             <>
                 <Grid
                     container
-                    alignItems="center"
+                    alignItems="flex-start"
                     justify="center"
-                >
+                    style={{minHeight: "70vh"}}>
                     {this.props.categories
                         .slice((this.state.selectedPage - 1) * this.state.step, this.state.selectedPage * this.state.step)
                         .map(category => (

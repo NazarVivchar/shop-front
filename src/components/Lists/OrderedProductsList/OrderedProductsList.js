@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import {Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import withTheme from "@material-ui/core/styles/withTheme";
-import OrderedProductCard from "../../OrderedProduct/OrderedProductCard";
+import OrderedProductCard from "../../OrderedProduct/OrderedProductCardContainer";
+import theme from "../../../theme";
 
 class OrderedProductsList extends Component {
     areProductsAvailable() {
@@ -10,39 +11,36 @@ class OrderedProductsList extends Component {
     }
 
     renderProducts() {
-        return (
-            <Grid
-                container
-                direction="column"
-                alignItems="center"
-            >
-                {this.props.orderedProducts.map(orderedProduct => (
-                            <OrderedProductCard key={orderedProduct.id} product={orderedProduct.product} amount={orderedProduct.amount}/>
-                    ))}
-            </Grid>
-        )
+        return this.props.orderedProducts.map(orderedProduct => (
+                <OrderedProductCard key={orderedProduct.id} product={orderedProduct.product}
+                                    amount={orderedProduct.amount}/>
+            )
+        );
     }
 
     renderNoAvailableProducts() {
         return (
-            <Grid
-                container
-                alignItems="center"
-                justify="center">
-                <Typography
-                    variant="h2"
-                    style={{marginTop: this.props.theme.spacing(30)}}>
-                    Замовлення порожнє
-                </Typography>
-            </Grid>
+            <Typography
+                variant="h3"
+                align="center"
+                style={{marginTop: theme.spacing(20)}}>
+                Замовлення порожнє
+            </Typography>
         )
     }
 
     render() {
         return (
-            this.areProductsAvailable()
-                ? this.renderProducts()
-                : this.renderNoAvailableProducts()
+            <Grid
+                container
+                alignItems="flex-start"
+                justify="center">
+                {
+                    this.areProductsAvailable()
+                        ? this.renderProducts()
+                        : this.renderNoAvailableProducts()
+                }
+            </Grid>
         )
     }
 }

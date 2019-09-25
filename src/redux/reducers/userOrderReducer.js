@@ -1,7 +1,7 @@
 import {userOrderActionTypes} from "../actions/userOrderActions/userOrderActions";
 
 const initialState = {
-    userOrder: null,
+    userOrder: [],
     isLoading: true,
 };
 
@@ -23,13 +23,26 @@ export default function userOrderReducer(state = initialState, action) {
         case userOrderActionTypes.CREATE_USER_ORDER:
             return {
                 ...state,
-                userOrder: action.payload,
+                userOrder: [
+                    ...(state.userOrder||[]),
+                    action.payload
+                ],
             };
 
         case userOrderActionTypes.UPDATE_USER_ORDER:
             return {
                 ...state,
-                userOrder: action.payload,
+                userOrder: [
+                    ...state.userOrder.map(userOrder => userOrder.id===action.payload.id?action.payload: userOrder)
+                ],
+            };
+
+        case userOrderActionTypes.DELETE_USER_ORDER:
+            return {
+                ...state,
+                userOrder: [
+                    ...state.userOrder.filter(userOrder => userOrder.id!==action.payload)
+                ],
             };
 
         default:

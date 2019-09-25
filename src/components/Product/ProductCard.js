@@ -16,41 +16,53 @@ class ProductCard extends Component {
         isDeletingDialogOpened: false,
     };
 
-    handleEditingDialogOpen =() => {
+    handleEditingDialogOpen = () => {
         this.setState({
             isEditingDialogOpened: true
-    })
+        })
     };
 
-    handleEditingDialogClose =() => {
+    handleEditingDialogClose = () => {
         this.setState({
             isEditingDialogOpened: false
         })
     };
 
-    handleDeletingDialogOpen =() => {
+    handleDeletingDialogOpen = () => {
         this.setState({
             isDeletingDialogOpened: true
         })
     };
 
-    handleDeletingDialogClose =() => {
+    handleDeletingDialogClose = () => {
         this.setState({
             isDeletingDialogOpened: false
         })
     };
 
     addToOrder = () => {
-        console.log(this.props.order);
-        this.props.addToOrder(this.props.order);
+        if (this.props.isOrderInProgress) {
+            this.props.addToOrder(this.props.username, this.props.orderInProgress);
+        } else this.props.addToNewOrder(this.props.username);
     };
 
     renderUserVariant() {
         const {theme} = this.props;
         return (
-            <Button variant="outlined" color="secondary" size="small" onClick={this.addToOrder}>
-                <AddShoppingCartIcon style={{color: theme.palette.secondary.dark}}/>
-            </Button>
+            <>
+                {
+                    this.props.isProductInOrder
+                        ?
+                        <Typography
+                            variant="h6"
+                            style={{color: "green"}}>
+                            У кошику
+                        </Typography>
+                        : <Button variant="outlined" color="secondary" size="small" onClick={this.addToOrder}>
+                            <AddShoppingCartIcon style={{color: theme.palette.secondary.dark}}/>
+                        </Button>
+                }
+            </>
         )
     }
 
@@ -82,13 +94,13 @@ class ProductCard extends Component {
                     product={this.props.product}
                     isOpened={this.state.isEditingDialogOpened}
                     handleClose={this.handleEditingDialogClose}/>
-                    <ConfirmDialog
-                        messageText="Ви впевнені, що хочете видалити цей продукт?"
-                        mainButtonText="Видалити"
-                        isOpened={this.state.isDeletingDialogOpened}
-                        handleClose={this.handleDeletingDialogClose}
-                        handleConfirm={this.props.handleDelete}
-                    />
+                <ConfirmDialog
+                    messageText="Ви впевнені, що хочете видалити цей продукт?"
+                    mainButtonText="Видалити"
+                    isOpened={this.state.isDeletingDialogOpened}
+                    handleClose={this.handleDeletingDialogClose}
+                    handleConfirm={this.props.handleDelete}
+                />
 
             </>
         )

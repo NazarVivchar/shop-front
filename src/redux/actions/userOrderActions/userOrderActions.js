@@ -2,7 +2,8 @@ export const userOrderActionTypes = {
     GET_USER_ORDER: '[USER_ORDER] Trying to get user order',
     GET_USER_ORDER_SUCCESS: '[USER_ORDER] Successfully got user order',
     CREATE_USER_ORDER: '[USER_ORDER] Successfully created new user order',
-    UPDATE_USER_ORDER: '[USER_ORDER] Successfully created new user order',
+    UPDATE_USER_ORDER: '[USER_ORDER] Successfully updated user order',
+    DELETE_USER_ORDER: '[USER_ORDER] Successfully deleted user order',
 };
 
 export const getUserOrderAction = () => ({
@@ -22,4 +23,9 @@ export const createUserOrderSuccessAction = userOrder => ({
 export const updateUserOrderSuccessAction = userOrder => ({
     type: userOrderActionTypes.UPDATE_USER_ORDER,
     payload: userOrder,
+});
+
+export const deleteUserOrderSuccessAction = id => ({
+    type: userOrderActionTypes.DELETE_USER_ORDER,
+    payload: id,
 });

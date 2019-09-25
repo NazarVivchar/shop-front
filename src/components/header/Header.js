@@ -65,11 +65,17 @@ class Header extends Component {
 
     getNumberOfOrderedProducts() {
         const {userOrder} = this.props;
-        return userOrder && userOrder.find(userOrder => userOrder.status === "inProgress").orderedProducts.length
+        if (userOrder) {
+            const foundUserOrder = userOrder.find(userOrder => userOrder.status === "inProgress");
+            return foundUserOrder && foundUserOrder.orderedProducts
+                ? foundUserOrder.orderedProducts.length
+                : 0;
+        }
     }
 
     render() {
         const {theme} = this.props;
+
         return (
             <>
                 <Grid
@@ -88,13 +94,15 @@ class Header extends Component {
                     </Typography>
 
                 </Grid>
-                <AppBar position="sticky" style={{top: 0}}>
+                <AppBar
+                    position="sticky"
+                    style={{top: 0}}>
                     <Toolbar>
                         <Grid
                             container
                             alignItems="center"
                             justify="space-between"
-                            style={{margin: `0 ${theme.spacing(1)}`}}>
+                            style={{margin: `0 ${theme.spacing(1)}`, height: "70px"}}>
                             <Grid item xs={7}>
                                 <Grid
                                     container
@@ -114,16 +122,17 @@ class Header extends Component {
 
                             </Grid>
                             <Grid item xs={5}>
-                                <Grid container justify="flex-end">
+                                <Grid container justify="flex-end" alignItems="center">
                                     {this.props.isUserLogged &&
 
                                     <IconButton
                                         color="inherit"
-                                        onClick={this.handleShoppingCartDialogOpen}>
+                                        onClick={this.handleShoppingCartDialogOpen}
+                                        style={{padding: theme.spacing(1)}}>
                                         <Badge
                                             color="secondary"
                                             badgeContent={this.getNumberOfOrderedProducts()}
-                                            style={{margin: theme.spacing(2)}}>
+                                            style={{margin: theme.spacing(0.5)}}>
                                             <ShoppingCartIcon fontSize="large"/>
                                         </Badge>
                                     </IconButton>
@@ -132,12 +141,14 @@ class Header extends Component {
                                     {this.props.isUserLogged
                                         ? <IconButton
                                             color="inherit"
-                                            onClick={this.props.logOutUser}>
+                                            onClick={this.props.logOutUser}
+                                            style={{padding: theme.spacing(1)}}>
                                             <LogOutIcon fontSize="large"/>
                                         </IconButton>
                                         : <IconButton
                                             color="inherit"
-                                            onClick={this.handleLoginDialogOpen}>
+                                            onClick={this.handleLoginDialogOpen}
+                                            style={{paddingTop: 0, paddingBottom: 0}}>
                                             <AccountIcon fontSize="large"/>
                                         </IconButton>
                                     }

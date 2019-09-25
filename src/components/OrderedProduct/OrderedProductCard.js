@@ -6,6 +6,11 @@ import withTheme from "@material-ui/core/styles/withTheme";
 import DeleteForeverIcon from "@material-ui/icons/deleteForever";
 
 class OrderedProductCard extends Component {
+
+    removeFromOrder = () => {
+        this.props.removeFromOrder(this.props.username, this.props.orderInProgress);
+    };
+
     render() {
         const {theme} = this.props;
 
@@ -26,7 +31,7 @@ class OrderedProductCard extends Component {
                         align="center"
                         style={{
                             color: theme.palette.secondary.dark,
-                            minWidth: "200px"
+                            marginLeft: theme.spacing(2)
                         }}>
                         {this.props.product.name}
                     </Typography>
@@ -42,6 +47,7 @@ class OrderedProductCard extends Component {
                     <Button
                         variant="outlined"
                         color="primary"
+                        onClick={this.removeFromOrder}
                         style={{
                             marginRight: theme.spacing(1)
                         }}>

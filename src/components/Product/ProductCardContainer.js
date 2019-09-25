@@ -1,36 +1,52 @@
 import {connect} from "react-redux";
 import ProductCard from "./ProductCard";
 import {deleteProduct} from "../../redux/actions/productsActions/productsActionsDispatcher";
-import {updateUserOrder} from "../../redux/actions/userOrderActions/userOrderActionsDispatcher";
+import {
+    addToNewUserOrder,
+    updateUserOrder
+} from "../../redux/actions/userOrderActions/userOrderActionsDispatcher";
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const handleDelete = () => dispatch(deleteProduct(ownProps.product.id));
-    const addToOrder = order => {
+    const addToOrder = (username, order) => {
         dispatch(updateUserOrder(
-            ownProps.username,
+            username,
             {
-                ...ownProps.orderInProgress,
+                ...order,
                 orderedProducts: [
-                    ...ownProps.orderInProgress.orderedProducts,
+                    ...order.orderedProducts,
                     {
                         amount: 1,
-                        product: ownProps.product,
+                        product: {
+                            id: ownProps.product.id
+                        },
                     }
                 ]
             }
         ))
     };
 
+    const addToNewOrder = username => {
+        dispatch(addToNewUserOrder(username, ownProps.product));
+    };
+
     return {
         handleDelete,
-        addToOrder
+        addToOrder,
+        addToNewOrder
     }
 };
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state.userOrderData.userOrder);
-    return  {
-        order: state.userOrderData.userOrder,
+    const foundUserOrder = state.userOrderData.userOrder.find(userOrder => userOrder.status === "inProgress");
+
+    return {
+        isOrderInProgress: !!foundUserOrder,
+        orderInProgress: foundUserOrder,
+        isProductInOrder: foundUserOrder
+            && foundUserOrder.orderedProducts
+            && foundUserOrder.orderedProducts
+                .some(orderedProduct => orderedProduct.product.id === ownProps.product.id),
         username: state.userData.username,
     };
 };
