@@ -128,7 +128,10 @@ class Header extends Component {
                                     <IconButton
                                         color="inherit"
                                         onClick={this.handleShoppingCartDialogOpen}
-                                        style={{padding: theme.spacing(1)}}>
+                                        style={{
+                                            padding: theme.spacing(1),
+                                            marginRight: theme.spacing(window.screen.width < 1000 ? 0 : 10)
+                                        }}>
                                         <Badge
                                             color="secondary"
                                             badgeContent={this.getNumberOfOrderedProducts()}
@@ -142,13 +145,19 @@ class Header extends Component {
                                         ? <IconButton
                                             color="inherit"
                                             onClick={this.props.logOutUser}
-                                            style={{padding: theme.spacing(1)}}>
+                                            style={{
+                                                padding: theme.spacing(1),
+                                                marginRight: theme.spacing(window.screen.width < 1000 ? 0 : 4)
+                                            }}>
                                             <LogOutIcon fontSize="large"/>
                                         </IconButton>
                                         : <IconButton
                                             color="inherit"
                                             onClick={this.handleLoginDialogOpen}
-                                            style={{paddingTop: 0, paddingBottom: 0}}>
+                                            style={{
+                                                padding: theme.spacing(1),
+                                                marginRight: theme.spacing(window.screen.width < 1000 ? 0 : 4)
+                                            }}>
                                             <AccountIcon fontSize="large"/>
                                         </IconButton>
                                     }

@@ -8,7 +8,7 @@ import Paginator from "../../paginator/Paginator";
 class CategoryList extends Component {
     state = {
         selectedPage: 1,
-        step: 5
+        step: 6
     };
 
     handlePageChange = selectedPage => () => {

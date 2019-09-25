@@ -95,10 +95,8 @@ function NavigationDrawer(props) {
                                 align="center"
                                 variant="h6">
                                 {text}
-
                             </Typography>
                         </Grid>
-
                     </Grid>
                 </ButtonBase>
             </NavLink>
