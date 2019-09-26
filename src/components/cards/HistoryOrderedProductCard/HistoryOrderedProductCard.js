@@ -2,10 +2,11 @@ import React, {Component} from "react";
 import Grid from "@material-ui/core/Grid/index";
 import Typography from "@material-ui/core/Typography/index";
 import withTheme from "@material-ui/core/styles/withTheme";
+import round from "lodash.round";
 
 class HistoryOrderedProductCard extends Component {
     render() {
-        const {theme} = this.props;
+        const {theme, product} = this.props;
 
         return (
             <Grid
@@ -20,14 +21,14 @@ class HistoryOrderedProductCard extends Component {
                         gutterBottom
                         align="left"
                         style={{color: theme.palette.secondary.dark}}>
-                        {this.props.product.name}
+                        {product.name}
                     </Typography>
                 </Grid>
                 <Grid item xs={2}>
                     <Typography
                         gutterBottom
                         align="right">
-                        {`$  ${this.props.product.price}`}
+                        {`$  ${round(product.price*(1-product.discount/100), 2)}`}
                     </Typography>
                 </Grid>
             </Grid>

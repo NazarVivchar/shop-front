@@ -8,7 +8,7 @@ import Paginator from "../../paginator/Paginator";
 class productList extends Component {
     state = {
         selectedPage: 1,
-        step: 2*Math.floor(window.screen.width/300)
+        step: Math.max(2*Math.floor(window.screen.width/300),6)
     };
 
     handlePageChange = selectedPage => () => {

@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography/index";
 import Button from "@material-ui/core/Button/index";
 import withTheme from "@material-ui/core/styles/withTheme";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import round from "lodash.round";
 
 class OrderedProductCard extends Component {
 
@@ -12,7 +13,7 @@ class OrderedProductCard extends Component {
     };
 
     render() {
-        const {theme} = this.props;
+        const {theme, product} = this.props;
 
         return (
             <Grid
@@ -33,7 +34,7 @@ class OrderedProductCard extends Component {
                             color: theme.palette.secondary.dark,
                             marginLeft: theme.spacing(2)
                         }}>
-                        {this.props.product.name}
+                        {product.name}
                     </Typography>
                 </Grid>
                 <Grid item xs={4}>
@@ -41,7 +42,7 @@ class OrderedProductCard extends Component {
                         gutterBottom
                         variant="h6"
                         align="center">
-                        {`$  ${this.props.product.price}`}
+                        {`$  ${round(product.price*(1-product.discount/100), 2)}`}
                     </Typography>
                 </Grid>
                 <Grid item xs={1}>

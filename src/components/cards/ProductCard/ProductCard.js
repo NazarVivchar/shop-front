@@ -9,11 +9,14 @@ import EditIcon from "@material-ui/icons/Create"
 import "./ProductCard.scss"
 import ProductDialog from "../../dialogs/ProductDialog/EditingProductDialogContainer";
 import ConfirmDialog from "../../dialogs/ConfirmDialog/ConfirmDialog";
+import Slider from "@material-ui/core/Slider";
+import round from 'lodash.round';
 
 class ProductCard extends Component {
     state = {
         isEditingDialogOpened: false,
         isDeletingDialogOpened: false,
+        discount: this.props.product.discount
     };
 
     handleEditingDialogOpen = () => {
@@ -38,6 +41,16 @@ class ProductCard extends Component {
         this.setState({
             isDeletingDialogOpened: false
         })
+    };
+
+    handleDiscountChange = (event, value) => {
+        this.setState({
+            discount: value
+        })
+    };
+
+    handleDiscountSubmit = () => {
+        this.props.setDiscount(this.state.discount);
     };
 
     addToOrder = () => {
@@ -106,6 +119,60 @@ class ProductCard extends Component {
         )
     }
 
+    renderDiscountPicker() {
+        const {theme} = this.props;
+
+        return (
+            <Grid container direction="row" style={{
+                height: "15%",
+                paddingBottom: theme.spacing(3)
+            }}>
+                <Grid
+                    container
+                    justify="space-between">
+                    <Typography gutterBottom>
+                        Знижка
+                    </Typography>
+                    <Typography gutterBottom>
+                        {this.state.discount}%
+                    </Typography>
+                </Grid>
+                <Slider
+                    defaultValue={0}
+                    step={5}
+                    marks
+                    min={0}
+                    max={95}
+                    color="secondary"
+                    valueLabelDisplay="auto"
+                    onChange={this.handleDiscountChange}
+                    onChangeCommitted={this.handleDiscountSubmit}
+                />
+            </Grid>
+        )
+    }
+
+    renderDiscountMessage() {
+        const {theme, product} = this.props;
+
+        return (
+            <Grid container
+                  justify="center"
+                  alignItems="center"
+                  style={{
+                      height: "15%",
+                      paddingBottom: theme.spacing(3)
+                  }}>
+                <Typography
+                    align="center"
+                    variant="h6"
+                    color="secondary">
+                    Акція! Знижка <b>{product.discount}%</b>
+                </Typography>
+            </Grid>
+        )
+    }
+
 
     render() {
         const {product, theme} = this.props;
@@ -114,7 +181,6 @@ class ProductCard extends Component {
                 container
                 direction="column"
                 alignItems="center"
-                justify="space-between"
                 style={{
                     padding: theme.spacing(2),
                     margin: theme.spacing(2)
@@ -134,7 +200,7 @@ class ProductCard extends Component {
                         align="center"
                         style={{
                             color: theme.palette.secondary.dark,
-                            height: "25%"
+                            height: "15%"
                         }}>
                         {product.name}
                     </Typography>
@@ -142,7 +208,7 @@ class ProductCard extends Component {
                 <Grid
                     item
                     style={{
-                        height: "25%",
+                        height: !!product.discount? "20%": "35%",
                         overflow: "hidden",
                         textOverflow: "ellipsis"
                     }}>
@@ -155,28 +221,38 @@ class ProductCard extends Component {
                         }}>
                         {product.description}
                     </Typography>
+
                 </Grid>
+                {this.props.isUserLogged
+                && this.props.showAdminControls
+                    ? this.renderDiscountPicker()
+                    : !!product.discount && this.renderDiscountMessage()}
                 <Grid
                     container
                     justify="space-between"
                     style={{
-                        height: "10%"
+                        height: "15%"
                     }}>
                     <Grid item>
                         <Typography
                             variant="h6"
-                            style={{fontWeight: 600}}>
-                            {`$  ${product.price}`}
+                            style={{
+                                fontWeight: 600,
+                                color: product.discount ? "red" : ""
+                            }}>
+                            {`$  ${round(product.price * (1 - product.discount / 100), 2)}`}
                         </Typography>
                     </Grid>
                     <Grid item>
                         {this.props.isUserLogged && (
-                        this.props.showAdminControls
-                            ? this.renderAdminVariant()
-                            : this.renderUserVariant()
+                            this.props.showAdminControls
+                                ? this.renderAdminVariant()
+                                : this.renderUserVariant()
                         )}
                     </Grid>
+
                 </Grid>
+
             </Grid>
         )
     }

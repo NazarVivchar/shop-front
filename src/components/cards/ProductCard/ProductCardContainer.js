@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import ProductCard from "./ProductCard";
-import {deleteProduct} from "../../../redux/actions/productsActions/productsActionsDispatcher";
+import {deleteProduct, updateProduct} from "../../../redux/actions/productsActions/productsActionsDispatcher";
 import {
     addToNewUserOrder,
     updateUserOrder
@@ -25,7 +25,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             }
         ))
     };
+    const setDiscount = discount => {
+        console.log({
+            ...ownProps.product,
+            discount: discount
+        });
 
+        dispatch(updateProduct(
+            {
+                ...ownProps.product,
+                discount: discount
+            }
+        ))
+    };
     const addToNewOrder = username => {
         dispatch(addToNewUserOrder(username, ownProps.product));
     };
@@ -33,7 +45,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         handleDelete,
         addToOrder,
-        addToNewOrder
+        addToNewOrder,
+        setDiscount
     }
 };
 
