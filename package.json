@@ -10,10 +10,10 @@
     "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
-    "history": "latest",
-    "html-webpack-plugin": "latest",
-    "mini-css-extract-plugin": "latest",
-    "prop-types": "latest",
+    "history": "^4.10.1",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
@@ -26,8 +26,7 @@
     "style-loader": "^1.0.0",
     "use-react-router": "^1.0.7",
     "yup": "^0.27.0",
-    "Yup": "latest",
-    "lodash.round": "latest"
+    "lodash.round": "^4.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

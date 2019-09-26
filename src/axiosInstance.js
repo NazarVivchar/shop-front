@@ -8,4 +8,9 @@ const axiosInstance = axios.create({
     }
 });
 
+axiosInstance.interceptors.request.use(function (config) {
+    config.headers.Authorization =  localStorage.getItem('Token') || '';
+
+    return config;
+});
 export default axiosInstance;
