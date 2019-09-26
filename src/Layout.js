@@ -41,7 +41,7 @@ class Layout extends Component {
                 <div onClick={this.handleOutsideDrawerClick}>
                     <Paper
                         style={{
-                            margin: `0 ${theme.spacing(3)}px`,
+                            margin: `0 ${theme.spacing(2)}px`,
                             minHeight: "700px",
                             padding: theme.spacing(2)
                         }}>
