@@ -47,9 +47,7 @@ function NavigationDrawer(props) {
             <>
                 {renderLink('/main-page', 'Головна', <HomeIcon color={generateIconColor('/main-page')}
                                                                fontSize="inherit"/>)}
-
-                {}
-                                                               <Divider/>
+                <Divider/>
             </>
         )
     }
@@ -57,8 +55,9 @@ function NavigationDrawer(props) {
     function renderLoggedUserLinks() {
         return (
             <>
-                {renderLink('/user/order-history', 'Історія замовлень', <HistoryIcon  color={generateIconColor('/user/order-history')}
-                                                               fontSize="inherit"/>)}
+                {renderLink('/user/order-history', 'Історія замовлень', <HistoryIcon
+                    color={generateIconColor('/user/order-history')}
+                    fontSize="inherit"/>)}
                 <Divider/>
             </>
         )
