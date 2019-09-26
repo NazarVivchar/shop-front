@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Paper from '@material-ui/core/Paper';
 import withTheme from '@material-ui/core/styles/withTheme';
 import Header from './components/header/HeaderContainer';
-import NavigationDrawer from './components/NavigationDrawer/NavigationDrawer';
+import NavigationDrawer from './components/NavigationDrawer/NavigationDrawerContainer';
 
 class Layout extends Component {
     constructor(props) {

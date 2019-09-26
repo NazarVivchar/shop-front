@@ -26,7 +26,7 @@ class ShoppingCartDialog extends Component {
         }
     }
 
-    placeOrder = order => () =>{
+    placeOrder = order => () => {
         this.props.placeOrder(this.props.username, order);
         this.props.handleClose();
     };
@@ -45,27 +45,33 @@ class ShoppingCartDialog extends Component {
         const foundUserOrder = userOrder && userOrder.find(userOrder => userOrder.status === "inProgress");
 
         return (
-        <Grid container justify="center" alignItems="center" >
-            <Button
-                variant="outlined"
-                color="secondary"
-                size="medium"
-                onClick={this.placeOrder(foundUserOrder)}
-                style={{marginRight: theme.spacing(1)}}>
-                Замовити
-            </Button>
-            <Button
-                variant="outlined"
-                color="primary"
-                size="medium"
-                onClick={this.cancelOrder(foundUserOrder)}
-                style={{marginLeft: theme.spacing(1)}}>
-                <Typography style={{color: "red"}}>
-                    Очистити
-                </Typography>
-            </Button>
-        </Grid>
-    )
+            <Grid
+                container
+                alignItems="center"
+                direction="column">
+
+                <Grid container justify="center" alignItems="center">
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        size="medium"
+                        onClick={this.placeOrder(foundUserOrder)}
+                        style={{marginRight: theme.spacing(1)}}>
+                        Замовити
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        size="medium"
+                        onClick={this.cancelOrder(foundUserOrder)}
+                        style={{marginLeft: theme.spacing(1)}}>
+                        <Typography style={{color: "red"}}>
+                            Очистити
+                        </Typography>
+                    </Button>
+                </Grid>
+            </Grid>
+        )
     }
 
     renderDialog() {
@@ -79,6 +85,7 @@ class ShoppingCartDialog extends Component {
                 fullWidth
                 maxWidth="lg"
                 scroll="paper"
+                PaperProps={{style: {minHeight: "700px"}}}
                 fullScreen={window.screen.width < 500}>
                 <DialogTitle
                     style={{background: theme.palette.primary.main}}>
@@ -96,8 +103,15 @@ class ShoppingCartDialog extends Component {
                 <DialogContent style={{minHeight: "400px"}}>
                     <OrderedProductsList
                         orderedProducts={this.getOrderedProductsFromOrder(foundUserOrder)}/>
+                    <Grid
+                        container
+                        alignItems="flex-start"
+                        justify="flex-start"
+                        style={{marginTop: theme.spacing(5)}}>
+
+                    </Grid>
                 </DialogContent>
-                <DialogActions style={{height: "50px"}}>
+                <DialogActions style={{height: "100px"}}>
                     {foundUserOrder && this.renderDialogActions()}
                 </DialogActions>
             </Dialog>

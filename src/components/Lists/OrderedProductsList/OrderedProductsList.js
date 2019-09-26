@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import withTheme from "@material-ui/core/styles/withTheme";
 import OrderedProductCard from "../../OrderedProduct/OrderedProductCardContainer";
 import theme from "../../../theme";
+import {getTotalOfOrderedProducts} from "../../../utils/userOrderUtils";
 
 class OrderedProductsList extends Component {
     areProductsAvailable() {
@@ -11,11 +12,20 @@ class OrderedProductsList extends Component {
     }
 
     renderProducts() {
-        return this.props.orderedProducts.map(orderedProduct => (
+        const {orderedProducts} = this.props;
+        return (
+            <>
+                {orderedProducts.map(orderedProduct => (
                 <OrderedProductCard key={orderedProduct.id} product={orderedProduct.product}
                                     amount={orderedProduct.amount}/>
-            )
-        );
+                ))}
+                <Typography
+                    variant="h5"
+                    style={{marginTop: theme.spacing(4)}}>
+                    Загалом: {`  $ ${getTotalOfOrderedProducts(orderedProducts)}`}
+                </Typography>
+            </>
+        )
     }
 
     renderNoAvailableProducts() {
@@ -23,7 +33,7 @@ class OrderedProductsList extends Component {
             <Typography
                 variant="h3"
                 align="center"
-                style={{marginTop: theme.spacing(20)}}>
+                style={{marginTop: theme.spacing(35)}}>
                 Замовлення порожнє
             </Typography>
         )

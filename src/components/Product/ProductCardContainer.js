@@ -43,6 +43,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isOrderInProgress: !!foundUserOrder,
         orderInProgress: foundUserOrder,
+        isUserLogged: state.userData.isLogged,
         isProductInOrder: foundUserOrder
             && foundUserOrder.orderedProducts
             && foundUserOrder.orderedProducts

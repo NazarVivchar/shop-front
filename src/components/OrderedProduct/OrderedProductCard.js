@@ -24,11 +24,11 @@ class OrderedProductCard extends Component {
                     margin: theme.spacing(1),
                 }}
                 className="category-container">
-                <Grid item>
+                <Grid item xs={7}>
                     <Typography
                         gutterBottom
                         variant="h6"
-                        align="center"
+                        align="justify"
                         style={{
                             color: theme.palette.secondary.dark,
                             marginLeft: theme.spacing(2)
@@ -36,14 +36,15 @@ class OrderedProductCard extends Component {
                         {this.props.product.name}
                     </Typography>
                 </Grid>
-                {/*<Grid item>*/}
-                {/*    <Typography*/}
-                {/*        gutterBottom*/}
-                {/*        align="center">*/}
-                {/*        Кількість: {this.props.amount}*/}
-                {/*    </Typography>*/}
-                {/*</Grid>*/}
-                <Grid item>
+                <Grid item xs={4}>
+                    <Typography
+                        gutterBottom
+                        variant="h6"
+                        align="center">
+                        {`$  ${this.props.product.price}`}
+                    </Typography>
+                </Grid>
+                <Grid item xs={1}>
                     <Button
                         variant="outlined"
                         color="primary"

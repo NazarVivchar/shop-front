@@ -170,9 +170,11 @@ class ProductCard extends Component {
                         </Typography>
                     </Grid>
                     <Grid item>
-                        {this.props.showAdminControls
+                        {this.props.isUserLogged && (
+                        this.props.showAdminControls
                             ? this.renderAdminVariant()
-                            : this.renderUserVariant()}
+                            : this.renderUserVariant()
+                        )}
                     </Grid>
                 </Grid>
             </Grid>

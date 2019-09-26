@@ -6,6 +6,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import HomeIcon from '@material-ui/icons/Home';
 import ProductsIcon from '@material-ui/icons/ViewModule';
 import CategoriesIcon from '@material-ui/icons/ViewList';
+import HistoryIcon from '@material-ui/icons/History';
 import Divider from '@material-ui/core/Divider';
 import {makeStyles, useTheme} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -45,6 +46,18 @@ function NavigationDrawer(props) {
         return (
             <>
                 {renderLink('/main-page', 'Головна', <HomeIcon color={generateIconColor('/main-page')}
+                                                               fontSize="inherit"/>)}
+
+                {}
+                                                               <Divider/>
+            </>
+        )
+    }
+
+    function renderLoggedUserLinks() {
+        return (
+            <>
+                {renderLink('/user/order-history', 'Історія замовлень', <HistoryIcon  color={generateIconColor('/user/order-history')}
                                                                fontSize="inherit"/>)}
                 <Divider/>
             </>
@@ -138,9 +151,11 @@ function NavigationDrawer(props) {
                 container
                 direction="column"
                 alignItems="stretch"
-                style={{width: '260px'}}>
+                style={{width: '280px'}}>
                 {renderCommonLinks()}
-                {hasAdminRole() && renderAdminLinks()}
+                {props.isUserLogged && hasAdminRole() && renderAdminLinks()}
+                {props.isUserLogged && renderLoggedUserLinks()}
+
             </Grid>
         </Drawer>
     );
