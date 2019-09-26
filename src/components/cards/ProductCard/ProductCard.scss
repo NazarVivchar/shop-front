@@ -1,17 +1,9 @@
 .product-container {
+  width: 300px !important;
   height: 500px !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   @media(max-width: 320px) {
-    width: 270px;
-  }
-
-  @media(max-width: 767px) {
-    width: 100% !important;
-    max-width: 290px;
-  }
-
-  @media(max-width: 768px) {
-    width: 300px !important;
+    width: 270px !important;
   }
 }
