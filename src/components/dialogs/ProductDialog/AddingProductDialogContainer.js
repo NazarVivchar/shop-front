@@ -13,7 +13,8 @@ const mapDispatchToProps = dispatch => {
             description: product.description,
             price: product.price,
             category: product.category,
-            image: product.image
+            image: product.image,
+            discount: 0,
         }));
 
     return {

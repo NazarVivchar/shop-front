@@ -119,8 +119,9 @@ class ProductDialog extends Component {
                                 image: this.state.product.image
                             };
                             if ((product.id !== 0) && product.image !== "") {
-                                this.props.handleSubmit(product)
+                                this.props.handleSubmit(product);
                                 this.props.handleClose();
+                                this.setState({...this.props.initialState});
                             }
                         }}
                     >
