@@ -26,11 +26,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         ))
     };
     const setDiscount = discount => {
-        console.log({
-            ...ownProps.product,
-            discount: discount
-        });
-
         dispatch(updateProduct(
             {
                 ...ownProps.product,

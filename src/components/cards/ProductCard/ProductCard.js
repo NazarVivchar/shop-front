@@ -157,7 +157,7 @@ class ProductCard extends Component {
 
         return (
             <Grid container
-                  justify="center"
+                  justify="space-evenly"
                   alignItems="center"
                   style={{
                       height: "15%",
@@ -165,9 +165,14 @@ class ProductCard extends Component {
                   }}>
                 <Typography
                     align="center"
+                    variant="h6">
+                    Акція! Знижка
+                </Typography>
+                <Typography
+                    align="center"
                     variant="h6"
-                    color="secondary">
-                    Акція! Знижка <b>{product.discount}%</b>
+                    style={{color: "red"}}>
+                    <b>{product.discount}%</b>
                 </Typography>
             </Grid>
         )
@@ -208,7 +213,7 @@ class ProductCard extends Component {
                 <Grid
                     item
                     style={{
-                        height: !!product.discount? "20%": "35%",
+                        height: product.discount || this.props.showAdminControls ? "20%" : "35%",
                         overflow: "hidden",
                         textOverflow: "ellipsis"
                     }}>
@@ -238,7 +243,7 @@ class ProductCard extends Component {
                             variant="h6"
                             style={{
                                 fontWeight: 600,
-                                color: product.discount ? "red" : ""
+                                color: product.discount ? theme.palette.secondary.main : ""
                             }}>
                             {`$  ${round(product.price * (1 - product.discount / 100), 2)}`}
                         </Typography>

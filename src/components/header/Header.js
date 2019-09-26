@@ -20,17 +20,32 @@ class Header extends Component {
         isLoginDialogOpened: false,
         isRegisterDialogOpened: false,
         isShoppingCartDialogOpened: false,
+        isAppBarSticking: false
     };
+
+    componentDidMount() {
+        this.props.checkIfUserIsLogged();
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = () => {
+        if (window.scrollY > 150 && !this.state.isAppBarSticking) {
+            this.setState({
+                isAppBarSticking: true
+            })
+        } else if (window.scrollY < 150 && this.state.isAppBarSticking) {
+            this.setState({
+                isAppBarSticking: false
+            })
+        }
+    };
+
     swapForms = () => {
         this.setState(prevState => ({
             isLoginDialogOpened: !prevState.isLoginDialogOpened,
             isRegisterDialogOpened: !prevState.isRegisterDialogOpened
         }))
     };
-
-    componentDidMount() {
-        this.props.checkIfUserIsLogged();
-    }
 
     handleLoginDialogOpen = () => {
         this.setState({
@@ -83,14 +98,14 @@ class Header extends Component {
                     justify="center"
                     alignItems="center"
                     style={{
-                        height: '100px',
+                        height: '150px',
                         background: theme.palette.primary.dark,
                     }}>
                     <Typography
                         variant="h2"
                         color="secondary"
                         align="center">
-                        Placeholder
+                        Singularity PC
                     </Typography>
 
                 </Grid>
@@ -115,8 +130,9 @@ class Header extends Component {
                                         <MenuIcon fontSize="large"/>
                                     </IconButton>
                                     <Typography
-                                        variant="h5">
-                                        Singularity
+                                        variant="h5"
+                                        style={{marginLeft: theme.spacing(1)}}>
+                                        {this.state.isAppBarSticking && "Singularity"}
                                     </Typography>
                                 </Grid>
 
