@@ -1,6 +1,5 @@
 import axiosInstance from "../../../axiosInstance";
 import {
-    checkIfUserLoggedAction,
     logInUserSuccessAction,
     logOutUserSuccessAction,
     registerUserSuccessAction

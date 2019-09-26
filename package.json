@@ -25,7 +25,8 @@
     "redux-thunk": "^2.3.0",
     "style-loader": "^1.0.0",
     "use-react-router": "^1.0.7",
-    "yup": "^0.27.0"
+    "yup": "^0.27.0",
+    "Yup": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -63,9 +64,6 @@
     "gh-pages": "^2.1.1",
     "node-sass": "^4.12.0",
     "react-router-role-authorization": "^1.1.4",
-    "sass-loader": "^8.0.0",
-    "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.8.0"
+    "sass-loader": "^8.0.0"
   }
 }

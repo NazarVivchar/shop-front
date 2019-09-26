@@ -83,7 +83,6 @@ class DashboardProductPage extends Component {
     }
 
     render() {
-        const {theme} = this.props;
         return (
             <Grid
                 container

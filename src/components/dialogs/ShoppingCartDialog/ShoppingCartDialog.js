@@ -5,7 +5,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import OrderedProductsList from "../../Lists/OrderedProductsList/OrderedProductsList";
 import withTheme from "@material-ui/core/styles/withTheme";
 import Grid from "@material-ui/core/Grid";
-import CloseIcon from "@material-ui/icons/close"
+import CloseIcon from "@material-ui/icons/Close"
 import IconButton from "@material-ui/core/IconButton";
 import theme from "../../../theme";
 import DialogActions from "@material-ui/core/DialogActions";

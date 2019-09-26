@@ -2,14 +2,12 @@ import {connect} from "react-redux";
 import {getCategories} from "../../redux/actions/categoriesActions/categoriesActionsDispatcher";
 import MainPage from "./MainPage";
 import {getProducts} from "../../redux/actions/productsActions/productsActionsDispatcher";
-import {updateUserOrder} from "../../redux/actions/userOrderActions/userOrderActionsDispatcher";
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
     const loadData = () => {
         dispatch(getCategories());
         dispatch(getProducts());
     };
-
 
 
     return {loadData}

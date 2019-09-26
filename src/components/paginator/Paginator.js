@@ -3,8 +3,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import withTheme from "@material-ui/core/styles/withTheme";
-import ArrowBackIcon from "@material-ui/icons/chevronLeft"
-import ArrowForwardIcon from "@material-ui/icons/chevronRight"
+import ArrowBackIcon from "@material-ui/icons/ChevronLeft"
+import ArrowForwardIcon from "@material-ui/icons/ChevronRight"
 
 
 function Paginator(props)

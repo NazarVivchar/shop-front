@@ -123,7 +123,7 @@ class ProductCard extends Component {
                 <Grid item style={{height: "40%"}}>
                     <img
                         src={`data:image/gif;base64,${product.image}`}
-                        alt={`Image of ${product.name} was supposed to be here :(`}
+                        alt={`${product.name} was supposed to be here :(`}
                         align="middle"
                         style={{height: "100%", width: "auto"}}/>
                 </Grid>

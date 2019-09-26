@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import "./UserDialog.scss"
 import withTheme from "@material-ui/core/styles/withTheme";
 import Typography from "@material-ui/core/Typography";
-import * as Yup from "Yup";
+import * as Yup from "yup";
 
 class UserDialog extends Component {
 

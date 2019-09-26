@@ -12,7 +12,7 @@ import withTheme from "@material-ui/core/styles/withTheme";
 import LoginUserDialog from "../dialogs/UserDialog/LoginUserDialog";
 import RegisterUserDialog from "../dialogs/UserDialog/RegisterUserDialog";
 import ShoppingCartDialog from "../dialogs/ShoppingCartDialog/ShoppingCartDialogContainer";
-import ShoppingCartIcon from "@material-ui/icons/shoppingCart"
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import {Badge} from "@material-ui/core";
 
 class Header extends Component {
