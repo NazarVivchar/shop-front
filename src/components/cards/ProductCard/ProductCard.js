@@ -186,9 +186,10 @@ class ProductCard extends Component {
                 container
                 direction="column"
                 alignItems="center"
+                justify="space-between"
                 style={{
                     padding: theme.spacing(2),
-                    margin: theme.spacing(2)
+                    margin: theme.spacing(1)
                 }}
                 className="product-container">
                 <Grid item style={{height: "40%"}}>
@@ -205,7 +206,7 @@ class ProductCard extends Component {
                         align="center"
                         style={{
                             color: theme.palette.secondary.dark,
-                            height: "15%"
+                            height: "25%",
                         }}>
                         {product.name}
                     </Typography>
@@ -213,7 +214,7 @@ class ProductCard extends Component {
                 <Grid
                     item
                     style={{
-                        height: product.discount || this.props.showAdminControls ? "20%" : "35%",
+                        height: product.discount || this.props.showAdminControls ? "20%" : "30%",
                         overflow: "hidden",
                         textOverflow: "ellipsis"
                     }}>
@@ -236,7 +237,7 @@ class ProductCard extends Component {
                     container
                     justify="space-between"
                     style={{
-                        height: "15%"
+                        height: "10%"
                     }}>
                     <Grid item>
                         <Typography
