@@ -29,11 +29,11 @@ class Header extends Component {
     }
 
     handleScroll = () => {
-        if (window.scrollY > 150 && !this.state.isAppBarSticking) {
+        if (window.scrollY > 180 && !this.state.isAppBarSticking) {
             this.setState({
                 isAppBarSticking: true
             })
-        } else if (window.scrollY < 150 && this.state.isAppBarSticking) {
+        } else if (window.scrollY < 180 && this.state.isAppBarSticking) {
             this.setState({
                 isAppBarSticking: false
             })
@@ -98,16 +98,15 @@ class Header extends Component {
                     justify="center"
                     alignItems="center"
                     style={{
-                        height: '150px',
+                        height: '180px',
                         background: theme.palette.primary.dark,
                     }}>
                     <Typography
                         variant="h2"
                         color="secondary"
                         align="center">
-                        Singularity PC
+                        <b>Singularity  PC</b>
                     </Typography>
-
                 </Grid>
                 <AppBar
                     position="sticky"
