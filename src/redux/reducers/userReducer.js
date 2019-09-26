@@ -1,5 +1,6 @@
 import {userActionTypes} from "../actions/userActions/userActions";
 import {getUsernameFromToken} from "../../utils/userUtils";
+import {history} from "../../App"
 
 const initialState = {
     username: getUsernameFromToken(localStorage.getItem("Token")),
@@ -13,9 +14,12 @@ export default function userReducer(state = initialState, action) {
                 isLogged: true
             };
         case userActionTypes.LOG_USER_OUT_SUCCESS:
+            history.push("/");
+
             return {
                 username: "",
-                isLogged: false
+                isLogged: false,
+
             };
         case userActionTypes.IS_USER_LOGGED:
             return {

@@ -7,8 +7,8 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever"
 import EditIcon from "@material-ui/icons/Create"
 import "./ProductCard.scss"
-import ProductDialog from "../dialogs/ProductDialog/EditingProductDialogContainer";
-import ConfirmDialog from "../dialogs/ConfirmDialog/ConfirmDialog";
+import ProductDialog from "../../dialogs/ProductDialog/EditingProductDialogContainer";
+import ConfirmDialog from "../../dialogs/ConfirmDialog/ConfirmDialog";
 
 class ProductCard extends Component {
     state = {

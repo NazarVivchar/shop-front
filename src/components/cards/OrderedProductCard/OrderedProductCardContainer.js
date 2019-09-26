@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
     const foundUserOrder = state.userOrderData.userOrder.find(userOrder => userOrder.status === "inProgress");
 
     return {

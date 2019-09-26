@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import theme from "../../theme";
 import ProductList from "../../components/Lists/ProductList/ProductListContainer";
 import withTheme from "@material-ui/core/styles/withTheme";
+import {Typography} from "@material-ui/core";
 
 class MainPage extends Component {
     state = {
@@ -93,7 +94,19 @@ class MainPage extends Component {
     }
 
     renderUnavailableProducts() {
-        return <h1>No products are available</h1>
+        return (
+            <Grid
+                container
+                direction="column"
+                alignItems="center"
+                justify="center">
+                <Typography
+                    variant="h2"
+                    style={{marginTop: this.props.theme.spacing(30)}}>
+                    Немає доступних товарів
+                </Typography>
+            </Grid>
+        );
     }
 
     render() {

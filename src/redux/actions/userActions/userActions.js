@@ -18,6 +18,6 @@ export const checkIfUserLoggedAction = () => ({
     type: userActionTypes.IS_USER_LOGGED,
 });
 
-export const logOutUserSuccessAction = user => ({
+export const logOutUserSuccessAction = () => ({
     type: userActionTypes.LOG_USER_OUT_SUCCESS,
 });

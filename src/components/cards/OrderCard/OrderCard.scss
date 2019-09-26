@@ -1,0 +1,17 @@
+.order-container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  @media(min-width: 767px) {
+    width: 900px !important;
+  }
+  @media(max-width: 768px) {
+    width: 100% !important;
+    max-width: 900px !important;
+  }
+}
+
+.cancel-button-container {
+  @media(max-width: 768px) {
+    justify-content: center !important;
+  }
+}

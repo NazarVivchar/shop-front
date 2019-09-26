@@ -7,7 +7,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever"
 import EditIcon from "@material-ui/icons/Create"
 import ConfirmDialog from "../../dialogs/ConfirmDialog/ConfirmDialog";
 import "./CategoryCard.scss"
-import CategoryDialog from "../dialogs/CategoryDialog/EditingCategoryDialogContainer";
+import CategoryDialog from "../../dialogs/CategoryDialog/EditingCategoryDialogContainer";
 
 class CategoryCard extends Component {
     state = {

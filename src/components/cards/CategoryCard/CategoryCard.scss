@@ -2,11 +2,7 @@
   width: 90% !important;
 
   min-height: 80px !important;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  }
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   @media(min-width: 767px) {
     flex-direction: row;

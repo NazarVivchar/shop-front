@@ -1,11 +1,12 @@
 import React, {Component} from "react";
+import OrderList from "../../components/Lists/OrdersList/OrderListContainer";
 
 
 class UserOrderHistoryPage extends Component {
 
     render() {
         return (
-            <h1>Order history page</h1>
+        <OrderList />
         )
     }
 }
