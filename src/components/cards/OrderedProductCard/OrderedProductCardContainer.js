@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {deleteUserOrder, updateUserOrder} from "../../redux/actions/userOrderActions/userOrderActionsDispatcher";
+import {deleteUserOrder, updateUserOrder} from "../../../redux/actions/userOrderActions/userOrderActionsDispatcher";
 import OrderedProductCard from "./OrderedProductCard";
 
 const mapDispatchToProps = (dispatch, ownProps) => {

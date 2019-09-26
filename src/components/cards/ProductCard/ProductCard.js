@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography/index";
+import Grid from "@material-ui/core/Grid/index";
 import withTheme from "@material-ui/core/styles/withTheme";
-import Button from "@material-ui/core/Button";
+import Button from "@material-ui/core/Button/index";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart"
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever"
 import EditIcon from "@material-ui/icons/Create"

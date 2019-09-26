@@ -1,10 +1,10 @@
 import {connect} from "react-redux";
 import ProductCard from "./ProductCard";
-import {deleteProduct} from "../../redux/actions/productsActions/productsActionsDispatcher";
+import {deleteProduct} from "../../../redux/actions/productsActions/productsActionsDispatcher";
 import {
     addToNewUserOrder,
     updateUserOrder
-} from "../../redux/actions/userOrderActions/userOrderActionsDispatcher";
+} from "../../../redux/actions/userOrderActions/userOrderActionsDispatcher";
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const handleDelete = () => dispatch(deleteProduct(ownProps.product.id));

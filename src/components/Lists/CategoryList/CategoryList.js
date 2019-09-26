@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Grid from "@material-ui/core/Grid";
 import {Typography} from "@material-ui/core";
 import withTheme from "@material-ui/core/styles/withTheme";
-import CategoryCard from "../../Category/CategoryCardContainer";
+import CategoryCard from "../../cards/CategoryCard/CategoryCardContainer";
 import Paginator from "../../paginator/Paginator";
 
 class CategoryList extends Component {

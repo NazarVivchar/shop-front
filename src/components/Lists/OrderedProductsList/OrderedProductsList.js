@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Typography} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import withTheme from "@material-ui/core/styles/withTheme";
-import OrderedProductCard from "../../OrderedProduct/OrderedProductCardContainer";
+import OrderedProductCard from "../../cards/OrderedProductCard/OrderedProductCardContainer";
 import theme from "../../../theme";
 import {getTotalOfOrderedProducts} from "../../../utils/userOrderUtils";
 
