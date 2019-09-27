@@ -120,7 +120,7 @@ class ProductCard extends Component {
     }
 
     renderDiscountPicker() {
-        const {theme} = this.props;
+        const {theme, product} = this.props;
 
         return (
             <Grid container direction="row" style={{
@@ -138,7 +138,7 @@ class ProductCard extends Component {
                     </Typography>
                 </Grid>
                 <Slider
-                    defaultValue={0}
+                    defaultValue={product.discount}
                     step={5}
                     marks
                     min={0}
