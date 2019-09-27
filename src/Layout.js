@@ -31,7 +31,8 @@ class Layout extends Component {
         return (
             <div style={{
                 background: theme.palette.background.light,
-                minHeight: "100vh"
+                minHeight: "100vh",
+                paddingBottom: theme.spacing(4)
             }}>
                 <NavigationDrawer
                     isDrawerOpened={this.state.isDrawerOpened}
