@@ -7,44 +7,47 @@ import ArrowBackIcon from "@material-ui/icons/ChevronLeft"
 import ArrowForwardIcon from "@material-ui/icons/ChevronRight"
 
 
-function Paginator(props)
-{
+function Paginator(props) {
+    const handlePageChange = (i) => () => {
+        props.handlePageChange(i)();
+        window.scrollTo({top: 180, behavior: 'smooth'});
+    }
 
     const {numberOfElements, step, theme, selectedPage} = props;
-        const controls = [];
-        let index = 1;
-        for (let i = 0; i < numberOfElements; i += step) {
-            controls.push(
-                <Button
-                    key={index}
-                    onClick={props.handlePageChange(index)}
-                    variant="text"
-                    style={index === selectedPage
-                        ? {color: "#00bdd7", boxShadow: "0 0 5px rgba(0,0,0,0.2)"}
-                        : {}}>
-                    {index}
-                </Button>
-            );
-            ++index;
-        }
-        return (
+    const controls = [];
+    let index = 1;
+    for (let i = 0; i < numberOfElements; i += step) {
+        controls.push(
+            <Button
+                key={index}
+                onClick={handlePageChange(index)}
+                variant="text"
+                style={index === selectedPage
+                    ? {color: "#00bdd7", boxShadow: "0 0 5px rgba(0,0,0,0.2)"}
+                    : {}}>
+                {index}
+            </Button>
+        );
+        ++index;
+    }
+    return (
 
-            <Grid
-                container
-                alignItems="center"
-                justify="center"
-                style={{marginTop: theme.spacing(4)}}>
-                <ButtonGroup>
-                    <Button variant="text" onClick={props.handlePageChange(selectedPage - 1)}>
-                        <ArrowBackIcon/>
-                    </Button>
-                    {controls}
-                    <Button variant="text" onClick={props.handlePageChange(selectedPage + 1)}>
-                        <ArrowForwardIcon/>
-                    </Button>
-                </ButtonGroup>
-            </Grid>
-        )
+        <Grid
+            container
+            alignItems="center"
+            justify="center"
+            style={{marginTop: theme.spacing(4)}}>
+            <ButtonGroup>
+                <Button variant="text" onClick={handlePageChange(selectedPage - 1)}>
+                    <ArrowBackIcon/>
+                </Button>
+                {controls}
+                <Button variant="text" onClick={handlePageChange(selectedPage + 1)}>
+                    <ArrowForwardIcon/>
+                </Button>
+            </ButtonGroup>
+        </Grid>
+    )
 }
 
 export default withTheme(Paginator);
