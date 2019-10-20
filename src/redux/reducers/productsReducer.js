@@ -28,6 +28,15 @@ export default function productsReducer(state = initialState, action) {
                 isLoading: false,
             };
 
+        case productsActionTypes.GET_PRODUCT_BY_ID_SUCCESS:
+            return {
+                ...state,
+                products: [
+                    ...state.products,
+                    action.payload
+                ]
+            };
+
         case  productsActionTypes.GET_PRODUCTS_AMOUNT_SUCCESS:
             return {
                 ...state,

@@ -31,6 +31,7 @@ class productList extends Component {
         } else if (selectedPage < firstPage) {
             selectedPage = lastPage
         }
+
         this.props.changePagination(selectedPage);
         this.props.loadData();
         this.setState({selectedPage});
@@ -62,7 +63,7 @@ class productList extends Component {
                     numberOfElements={this.props.productsAmount}
                     step={this.state.step}
                     handlePageChange={this.handlePageChange}
-                    selectedPage={this.state.sFelectedPage}/>
+                    selectedPage={this.state.selectedPage}/>
                 }
             </>
         )

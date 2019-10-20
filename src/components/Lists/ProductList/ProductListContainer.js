@@ -8,7 +8,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     const loadData = () => {
         dispatch(getProducts(ownProps.selectedCategoryId));
         dispatch(getProductsAmount(ownProps.selectedCategoryId));
-        console.log(ownProps.selectedCategoryId);
     };
 
     const changePagination = start => dispatch(changePaginationStart(start));

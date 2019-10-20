@@ -11,6 +11,7 @@ import ProductDialog from "../../dialogs/ProductDialog/EditingProductDialogConta
 import ConfirmDialog from "../../dialogs/ConfirmDialog/ConfirmDialog";
 import Slider from "@material-ui/core/Slider";
 import round from 'lodash.round';
+import {Link} from "react-router-dom";
 
 class ProductCard extends Component {
     state = {
@@ -172,7 +173,7 @@ class ProductCard extends Component {
                     align="center"
                     variant="h6"
                     style={{color: "red"}}>
-                    <b>{product.discount+(product.category.discount?product.category.discount.percentage:0)}%</b>
+                    <b>{product.discount + (product.category.discount ? product.category.discount.percentage : 0)}%</b>
                 </Typography>
             </Grid>
         )
@@ -182,84 +183,91 @@ class ProductCard extends Component {
     render() {
         const {product, theme} = this.props;
         return (
-            <Grid
-                container
-                direction="column"
-                alignItems="center"
-                justify="space-between"
+            <Link
+                to={`/product-page/${product.id}`}
                 style={{
-                    padding: theme.spacing(2),
-                    margin: theme.spacing(2)
-                }}
-                className="product-container">
-                <Grid item style={{height: "40%"}}>
-                    <img
-                        src={`data:image/gif;base64,${product.image}`}
-                        alt={`${product.name} was supposed to be here :(`}
-                        align="middle"
-                        style={{height: "100%", width: "auto", maxWidth: "100%"}}/>
-                </Grid>
-                <Grid item>
-                    <Typography
-                        gutterBottom
-                        variant="h6"
-                        align="center"
-                        style={{
-                            color: theme.palette.secondary.dark,
-                            height: "25%",
-                        }}>
-                        {product.name}
-                    </Typography>
-                </Grid>
-                <Grid
-                    item
-                    style={{
-                        height: product.discount ||  product.category.discount ||this.props.showAdminControls ? "20%" : "30%",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis"
-                    }}>
-                    <Typography
-                        gutterBottom
-                        align="center"
-                        style={{
-                            fontSize: "12px",
-                            color: theme.palette.primary.light,
-                        }}>
-                        {product.description}
-                    </Typography>
-
-                </Grid>
-                {this.props.isUserLogged
-                && this.props.showAdminControls
-                    ? this.renderDiscountPicker()
-                    : !!(product.discount || product.category.discount) && this.renderDiscountMessage()}
+                    textDecoration: "none",
+                    color: "inherit"
+                }}>
                 <Grid
                     container
+                    direction="column"
+                    alignItems="center"
                     justify="space-between"
                     style={{
-                        height: "10%"
-                    }}>
-                    <Grid item>
-                        <Typography
-                            variant="h6"
-                            style={{
-                                fontWeight: 600,
-                                color: product.discount || product.category.discount ? theme.palette.secondary.main : ""
-                            }}>
-                            {`$  ${round(product.price * (1 - (product.discount+(product.category.discount?product.category.discount.percentage:0))/100), 2)}`}
-                        </Typography>
+                        padding: theme.spacing(2),
+                        margin: theme.spacing(2)
+                    }}
+                    className="product-container">
+                    <Grid item style={{height: "40%"}}>
+                        <img
+                            src={`data:image/gif;base64,${product.image}`}
+                            alt={`${product.name} was supposed to be here :(`}
+                            align="middle"
+                            style={{height: "100%", width: "auto", maxWidth: "100%"}}/>
                     </Grid>
                     <Grid item>
-                        {this.props.isUserLogged && (
-                            this.props.showAdminControls
-                                ? this.renderAdminVariant()
-                                : this.renderUserVariant()
-                        )}
+                        <Typography
+                            gutterBottom
+                            variant="h6"
+                            align="center"
+                            style={{
+                                color: theme.palette.secondary.dark,
+                                height: "25%",
+                            }}>
+                            {product.name}
+                        </Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        style={{
+                            height: product.discount || product.category.discount || this.props.showAdminControls ? "20%" : "30%",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis"
+                        }}>
+                        <Typography
+                            gutterBottom
+                            align="center"
+                            style={{
+                                fontSize: "12px",
+                                color: theme.palette.primary.light,
+                            }}>
+                            {product.description}
+                        </Typography>
+
+                    </Grid>
+                    {this.props.isUserLogged
+                    && this.props.showAdminControls
+                        ? this.renderDiscountPicker()
+                        : !!(product.discount || product.category.discount) && this.renderDiscountMessage()}
+                    <Grid
+                        container
+                        justify="space-between"
+                        style={{
+                            height: "10%"
+                        }}>
+                        <Grid item>
+                            <Typography
+                                variant="h6"
+                                style={{
+                                    fontWeight: 600,
+                                    color: product.discount || product.category.discount ? theme.palette.secondary.main : ""
+                                }}>
+                                {`$  ${round(product.price * (1 - (product.discount + (product.category.discount ? product.category.discount.percentage : 0)) / 100), 2)}`}
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            {this.props.isUserLogged && (
+                                this.props.showAdminControls
+                                    ? this.renderAdminVariant()
+                                    : this.renderUserVariant()
+                            )}
+                        </Grid>
+
                     </Grid>
 
                 </Grid>
-
-            </Grid>
+            </Link>
         )
     }
 }

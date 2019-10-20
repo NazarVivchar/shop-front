@@ -11,11 +11,12 @@ function Paginator(props) {
     const handlePageChange = (i) => () => {
         props.handlePageChange(i)();
         window.scrollTo({top: 180, behavior: 'smooth'});
-    }
+    };
 
     const {numberOfElements, step, theme, selectedPage} = props;
     const controls = [];
     let index = 1;
+
     for (let i = 0; i < numberOfElements; i += step) {
         controls.push(
             <Button

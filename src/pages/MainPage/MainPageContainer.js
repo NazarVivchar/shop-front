@@ -5,8 +5,6 @@ import {getProductsAmount} from "../../redux/actions/productsActions/productsAct
 
 const mapDispatchToProps = dispatch => {
     const loadData = categoryFilter => {
-        console.log('dfdfdf');
-
         dispatch(getCategories());
         dispatch(getProductsAmount(categoryFilter));
     };

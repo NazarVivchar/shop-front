@@ -1,6 +1,7 @@
 export const productsActionTypes = {
     GET_PRODUCTS: '[PRODUCTS] Trying to get products',
     GET_PRODUCTS_SUCCESS: '[PRODUCTS] Successfully got all products',
+    GET_PRODUCT_BY_ID_SUCCESS: '[PRODUCTS] Successfully got product by id',
     GET_PRODUCTS_AMOUNT_SUCCESS: '[PRODUCTS] Successfully got amount of products',
     SAVE_PRODUCT_SUCCESS: '[PRODUCTS] Successfully saved new product',
     UPDATE_PRODUCT_SUCCESS: '[PRODUCTS] Successfully update the product',
@@ -26,6 +27,11 @@ export const getProductsSuccessAction = response => ({
         type: productsActionTypes.GET_PRODUCTS_SUCCESS,
         payload: response,
     });
+
+export const getProductByIdSuccess = response => ({
+    type: productsActionTypes.GET_PRODUCT_BY_ID_SUCCESS,
+    payload: response
+});
 
 export const saveProductSuccessAction = product => ({
     type: productsActionTypes.SAVE_PRODUCT_SUCCESS,

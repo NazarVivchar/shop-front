@@ -5,6 +5,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import withAuthorization from "./AuthorizationHOC";
 import UserPage from "./pages/UserPage/UserPage";
+import ProductPage from "./pages/ProductPage/ProductPageContainer";
 
 const Routes = () => {
     return (
@@ -12,6 +13,7 @@ const Routes = () => {
             <Route path="/dashboard" render={() => withAuthorization(DashboardPage, ['ROLE_ADMIN'])} />
             <Route path="/user" render={() => withAuthorization(UserPage, ['ROLE_USER', 'ROLE_ADMIN'])} />
             <Route path="/main-page" component={MainPage}/>
+            <Route path="/product-page/:productId" component={ProductPage}/>
             <Redirect exact from="/" to="/main-page"/>
             <Route component={NotFoundPage}/>
         </Switch>

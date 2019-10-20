@@ -1,6 +1,6 @@
 import axiosInstance from "../../../axiosInstance";
 import {
-    deleteProductSuccessAction,
+    deleteProductSuccessAction, getProductByIdSuccess,
     getProductsAction, getProductsAmountSuccess,
     getProductsSuccessAction,
     saveProductSuccessAction,
@@ -14,6 +14,13 @@ export const getProducts = (categoryFilter=0) => (dispatch, getState) => {
     .then(response => {
         response && dispatch(getProductsSuccessAction(response.data))})
     .catch();
+};
+
+export const getProductById = id => dispatch => {
+    return axiosInstance.get(`/products/${id}`)
+        .then(response => {
+            response && dispatch(getProductByIdSuccess(response.data))})
+        .catch();
 };
 
 export const getProductsAmount = (categoryFilter=0) => dispatch => {

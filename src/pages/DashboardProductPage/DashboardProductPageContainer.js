@@ -7,7 +7,6 @@ const mapDispatchToProps = dispatch => {
     const loadData = categoryId => {
         dispatch(getCategories());
         dispatch(getProducts(categoryId));
-        console.log('loadData');
     };
 
     return {loadData}
