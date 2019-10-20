@@ -8,25 +8,37 @@ import Paginator from "../../paginator/Paginator";
 class productList extends Component {
     state = {
         selectedPage: 1,
-        step: 12
+        step: 8
     };
 
+    componentDidMount() {
+        this.props.loadData();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.selectedCategoryId !== prevProps.selectedCategoryId) {
+            this.props.loadData();
+        }
+    }
+
     handlePageChange = selectedPage => () => {
-        const numberOfElements = this.props.products.length;
+        const numberOfElements = this.props.productsAmount;
         const firstPage = 1;
         const lastPage = Math.ceil(numberOfElements / this.state.step);
 
         if (selectedPage > lastPage) {
-            selectedPage = firstPage
+            selectedPage = firstPage;
         } else if (selectedPage < firstPage) {
             selectedPage = lastPage
         }
+        this.props.changePagination(selectedPage);
+        this.props.loadData();
         this.setState({selectedPage});
     };
 
 
     areProductsAvailable() {
-        return this.props.products && this.props.products.length;
+        return this.props.productsAmount;
     }
 
     renderProducts() {
@@ -38,18 +50,20 @@ class productList extends Component {
                     justify="center"
                     style={{minHeight: "60vh"}}>
                     {this.props.products
-                        .slice((this.state.selectedPage - 1) * this.state.step, this.state.selectedPage * this.state.step)
                         .map(product => (
                             <Grid item key={product.id}>
-                                <ProductCard showAdminControls={this.props.isAdminList} product={product} addToOrder={this.props.addProductToOrder}/>
+                                <ProductCard showAdminControls={this.props.isAdminList} product={product}
+                                             addToOrder={this.props.addProductToOrder}/>
                             </Grid>
                         ))}
                 </Grid>
-                <Paginator
-                    numberOfElements={this.props.products.length}
+                {this.state.step < this.props.productsAmount
+                && < Paginator
+                    numberOfElements={this.props.productsAmount}
                     step={this.state.step}
                     handlePageChange={this.handlePageChange}
-                    selectedPage={this.state.selectedPage}/>
+                    selectedPage={this.state.sFelectedPage}/>
+                }
             </>
         )
     }

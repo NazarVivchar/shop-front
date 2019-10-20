@@ -28,7 +28,7 @@ class HistoryOrderedProductCard extends Component {
                     <Typography
                         gutterBottom
                         align="right">
-                        {`$  ${round(product.price*(1-product.discount/100), 2)}`}
+                        {`$  ${round(product.price * (1 - ((product.discount+product.category.discount)/100) ), 2)}`}
                     </Typography>
                 </Grid>
             </Grid>

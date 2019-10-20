@@ -81,7 +81,8 @@ class ProductDialog extends Component {
             name: Yup.string()
                 .max(50, "Назва не можу бути довшою 50 символів")
                 .required('Це поле обов\'язкове'),
-            description: Yup.string().max(100, "опис не може бути довшим 100 символів"),
+            description: Yup.string()
+                .max(100, "опис не може бути довшим 100 символів"),
             price: Yup.number()
                 .positive('Число має бути більшим 0')
                 .required('Це поле обов\'язкове'),
@@ -139,7 +140,7 @@ class ProductDialog extends Component {
                                     {this.renderErrorMessage(errors, touched, "name")}
                                     <Field name="description"
                                            render={this.renderTextField("text", "Опис")}/>
-                                    {this.renderErrorMessage(errors, touched, "name")}
+                                    {this.renderErrorMessage(errors, touched, "description")}
                                     <Field name="price"
                                            render={this.renderTextField("number", "Ціна")}/>
                                     {this.renderErrorMessage(errors, touched, "price")}

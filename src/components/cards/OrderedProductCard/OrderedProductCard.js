@@ -42,7 +42,7 @@ class OrderedProductCard extends Component {
                         gutterBottom
                         variant="h6"
                         align="center">
-                        {`$  ${round(product.price*(1-product.discount/100), 2)}`}
+                        {`$  ${round(product.price * (1 - ((product.discount+product.category.discount?product.category.discount.percentage:0)/100) ), 2)}`}
                     </Typography>
                 </Grid>
                 <Grid item xs={1}>

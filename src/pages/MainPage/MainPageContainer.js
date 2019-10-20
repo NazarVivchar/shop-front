@@ -1,12 +1,14 @@
 import {connect} from "react-redux";
 import {getCategories} from "../../redux/actions/categoriesActions/categoriesActionsDispatcher";
 import MainPage from "./MainPage";
-import {getProducts} from "../../redux/actions/productsActions/productsActionsDispatcher";
+import {getProductsAmount} from "../../redux/actions/productsActions/productsActionsDispatcher";
 
 const mapDispatchToProps = dispatch => {
-    const loadData = () => {
+    const loadData = categoryFilter => {
+        console.log('dfdfdf');
+
         dispatch(getCategories());
-        dispatch(getProducts());
+        dispatch(getProductsAmount(categoryFilter));
     };
 
 
@@ -16,7 +18,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         categories: state.categoriesData.categories,
-        products: state.productsData.products,
+        productsAmount: state.productsData.total,
 
         categoryOptions: [
             {

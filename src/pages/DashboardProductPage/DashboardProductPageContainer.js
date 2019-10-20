@@ -4,9 +4,10 @@ import {getProducts} from "../../redux/actions/productsActions/productsActionsDi
 import DashboardProductPage from "./DashboardProductPage";
 
 const mapDispatchToProps = dispatch => {
-    const loadData = () => {
+    const loadData = categoryId => {
         dispatch(getCategories());
-        dispatch(getProducts());
+        dispatch(getProducts(categoryId));
+        console.log('loadData');
     };
 
     return {loadData}

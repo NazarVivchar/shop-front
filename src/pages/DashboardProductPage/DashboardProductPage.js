@@ -17,7 +17,7 @@ class DashboardProductPage extends Component {
 
 
     componentDidMount() {
-        this.props.loadData();
+        this.props.loadData(this.state.selectedCategory.id);
     }
 
     onCategoryChange = event => {

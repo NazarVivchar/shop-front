@@ -1,26 +1,37 @@
-import {getProducts} from "../../../redux/actions/productsActions/productsActionsDispatcher";
+import {getProducts, getProductsAmount} from "../../../redux/actions/productsActions/productsActionsDispatcher";
 import {connect} from "react-redux";
 import ProductList from "./ProductList";
-import {orderProductsByName, orderProductsByPrice, selectProductsByCategory} from "../../../selectors/productSelectors";
+import {orderProductsByName, orderProductsByPrice} from "../../../selectors/productSelectors";
+import {changePaginationStart} from "../../../redux/actions/productsActions/productsActions";
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     const loadData = () => {
-        dispatch(getProducts());
+        dispatch(getProducts(ownProps.selectedCategoryId));
+        dispatch(getProductsAmount(ownProps.selectedCategoryId));
+        console.log(ownProps.selectedCategoryId);
     };
 
-    return {loadData}
+    const changePagination = start => dispatch(changePaginationStart(start));
+
+    return {
+        loadData,
+        changePagination
+    }
 };
 
 const mapStateToProps = (state, ownProps) => {
-    const products = selectProductsByCategory(state, ownProps.selectedCategoryId);
+    const products = state.productsData.products;
+
 
     if (ownProps.sortingField === 'price') {
         return {
-            products: orderProductsByPrice(products, ownProps.sortingOrder)
+            products: orderProductsByPrice(products, ownProps.sortingOrder),
+            productsAmount: state.productsData.total
         }
     } else {
         return {
-            products: orderProductsByName(products, 1)
+            products: orderProductsByName(products, 1),
+            productsAmount: state.productsData.total
         }
     }
 };

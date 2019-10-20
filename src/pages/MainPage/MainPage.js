@@ -10,11 +10,10 @@ class MainPage extends Component {
     state = {
         selectedCategory: this.props.categoryOptions[0],
         selectedOrder: this.props.orderOptions[0],
-        isWrongRoleMessageDisplayed: false,
     };
 
     componentDidMount() {
-        this.props.loadData();
+        this.props.loadData(this.state.selectedCategory.id);
     }
 
     onCategoryChange = event => {
@@ -44,7 +43,7 @@ class MainPage extends Component {
     };
 
     areProductsAvailable() {
-        return this.props.products && this.props.products.length;
+        return this.props.productsAmount;
     }
 
     renderSelects() {

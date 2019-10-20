@@ -172,7 +172,7 @@ class ProductCard extends Component {
                     align="center"
                     variant="h6"
                     style={{color: "red"}}>
-                    <b>{product.discount}%</b>
+                    <b>{product.discount+(product.category.discount?product.category.discount.percentage:0)}%</b>
                 </Typography>
             </Grid>
         )
@@ -197,7 +197,7 @@ class ProductCard extends Component {
                         src={`data:image/gif;base64,${product.image}`}
                         alt={`${product.name} was supposed to be here :(`}
                         align="middle"
-                        style={{height: "100%", width: "auto"}}/>
+                        style={{height: "100%", width: "auto", maxWidth: "100%"}}/>
                 </Grid>
                 <Grid item>
                     <Typography
@@ -214,7 +214,7 @@ class ProductCard extends Component {
                 <Grid
                     item
                     style={{
-                        height: product.discount || this.props.showAdminControls ? "20%" : "30%",
+                        height: product.discount ||  product.category.discount ||this.props.showAdminControls ? "20%" : "30%",
                         overflow: "hidden",
                         textOverflow: "ellipsis"
                     }}>
@@ -232,7 +232,7 @@ class ProductCard extends Component {
                 {this.props.isUserLogged
                 && this.props.showAdminControls
                     ? this.renderDiscountPicker()
-                    : !!product.discount && this.renderDiscountMessage()}
+                    : !!(product.discount || product.category.discount) && this.renderDiscountMessage()}
                 <Grid
                     container
                     justify="space-between"
@@ -244,9 +244,9 @@ class ProductCard extends Component {
                             variant="h6"
                             style={{
                                 fontWeight: 600,
-                                color: product.discount ? theme.palette.secondary.main : ""
+                                color: product.discount || product.category.discount ? theme.palette.secondary.main : ""
                             }}>
-                            {`$  ${round(product.price * (1 - product.discount / 100), 2)}`}
+                            {`$  ${round(product.price * (1 - (product.discount+(product.category.discount?product.category.discount.percentage:0))/100), 2)}`}
                         </Typography>
                     </Grid>
                     <Grid item>

@@ -8,11 +8,13 @@ import EditIcon from "@material-ui/icons/Create"
 import ConfirmDialog from "../../dialogs/ConfirmDialog/ConfirmDialog";
 import "./CategoryCard.scss"
 import CategoryDialog from "../../dialogs/CategoryDialog/EditingCategoryDialogContainer";
+import Slider from "@material-ui/core/Slider";
 
 class CategoryCard extends Component {
     state = {
         isEditingDialogOpened: false,
         isDeletingDialogOpened: false,
+        discount: this.props.category.discount?this.props.category.discount.percentage:0
     };
 
     componentDidMount() {
@@ -43,6 +45,48 @@ class CategoryCard extends Component {
         }))
     };
 
+    handleDiscountChange = (event, value) => {
+        this.setState({
+            discount: value
+        })
+    };
+
+    handleDiscountSubmit = () => {
+        this.props.setDiscount(this.state.discount);
+    };
+
+    renderDiscountPicker() {
+        const {theme, category} = this.props;
+
+        return (
+            <Grid container direction="row" style={{
+                height: "15%",
+                paddingBottom: theme.spacing(3)
+            }}>
+                <Grid
+                    container
+                    justify="space-between">
+                    <Typography gutterBottom>
+                        Знижка
+                    </Typography>
+                    <Typography gutterBottom>
+                        {this.state.discount}%
+                    </Typography>
+                </Grid>
+                <Slider
+                    defaultValue={this.state.discount}
+                    step={5}
+                    marks
+                    min={0}
+                    max={95}
+                    color="secondary"
+                    valueLabelDisplay="auto"
+                    onChange={this.handleDiscountChange}
+                    onChangeCommitted={this.handleDiscountSubmit}
+                />
+            </Grid>
+        )
+    }
 
     render() {
         const {category, theme} = this.props;
@@ -56,6 +100,7 @@ class CategoryCard extends Component {
                     margin: theme.spacing(2),
                 }}
                 className="category-container">
+                {this.renderDiscountPicker()}
                 <Grid item>
                     <Typography
                         gutterBottom
@@ -84,7 +129,7 @@ class CategoryCard extends Component {
                         style={{
                             marginRight: theme.spacing(1)
                         }}>
-                        <DeleteForeverIcon style={{color: !this.props.numberOfProducts? "red" : "lightgrey"}}/>
+                        <DeleteForeverIcon style={{color: !this.props.numberOfProducts ? "red" : "lightgrey"}}/>
                     </Button>
                     <Button
                         variant="outlined"
