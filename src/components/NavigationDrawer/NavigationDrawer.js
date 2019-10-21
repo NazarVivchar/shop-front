@@ -7,6 +7,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import ProductsIcon from '@material-ui/icons/ViewModule';
 import CategoriesIcon from '@material-ui/icons/ViewList';
 import HistoryIcon from '@material-ui/icons/History';
+import EmailIcon from '@material-ui/icons/Email';
 import Divider from '@material-ui/core/Divider';
 import {makeStyles, useTheme} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -124,6 +125,10 @@ function NavigationDrawer(props) {
                         fontSize="inherit"/>)}
                 {renderLink('/dashboard/categories', 'Категорії',
                     <CategoriesIcon
+                        color={generateIconColor('/dashboard/categories')}
+                        fontSize="inherit"/>)}
+                {renderLink('/dashboard/mailing', 'Розсилки',
+                    <EmailIcon
                         color={generateIconColor('/dashboard/categories')}
                         fontSize="inherit"/>)}
                 <Divider/>

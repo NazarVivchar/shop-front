@@ -55,7 +55,6 @@ class ProductPage extends Component {
                         container
                         alignItems={"center"}
                         justify={"center"}>
-
                         <Grid
                             xs={6}
                             item>
@@ -74,23 +73,58 @@ class ProductPage extends Component {
                         <Grid
                             xs={6}
                             item>
-                            <Grid container direction={"row"} justify={"space-between"}>
-                                <h2 style={{color: theme.palette.secondary.main}}>Назва</h2>
-                                <h2>{product.name}</h2>
-                            </Grid>
-                            <Grid container direction={"row"} justify={"space-between"}>
-                                <h2 style={{color: theme.palette.secondary.main}}>Категорія</h2>
-                                <h2>{product.category.name}</h2>
-                            </Grid>
-                            <Grid container direction={"row"} justify={"space-between"}>
-                                <h2 style={{color: theme.palette.secondary.main}}>Опис</h2>
-                                <h2>{product.description}</h2>
-                            </Grid>
-                            <Grid container direction={"row"} justify={"space-between"}>
-                                <h2 style={{color: theme.palette.secondary.main}}>Ціна</h2>
-                                <h2>
-                                    {`$  ${round(product.price * (1 - (product.discount + (product.category.discount ? product.category.discount.percentage : 0)) / 100), 2)}`}
-                                </h2>
+                            <Grid
+                                container
+                                style={{height: "400px"}}
+                                alignItems={"center"}
+                                justify={"space-evenly"}>
+                                <Grid
+                                    container
+                                    direction={"row"}
+                                    justify={"space-between"}>
+                                    <Typography
+                                        variant={"h5"}
+                                        color={"secondary"}>
+                                        Назва
+                                    </Typography>
+                                    <Typography
+                                        variant={"h5"}>
+                                        {product.name}
+                                    </Typography>
+                                </Grid>
+                                <Grid container direction={"row"} justify={"space-between"}>
+                                    <Typography
+                                        variant={"h5"}
+                                        color={"secondary"}>
+                                        Категорія
+                                    </Typography>
+                                    <Typography
+                                        variant={"h5"}>
+                                        {product.category.name}
+                                    </Typography>
+                                </Grid>
+                                <Grid container direction={"row"} justify={"space-between"}>
+                                    <Typography
+                                        variant={"h5"}
+                                        color={"secondary"}>
+                                        Опис
+                                    </Typography>
+                                    <Typography
+                                        variant={"h5"}>
+                                        {product.description}
+                                    </Typography>
+                                </Grid>
+                                <Grid container direction={"row"} justify={"space-between"}>
+                                    <Typography
+                                        variant={"h5"}
+                                        color={"secondary"}>
+                                        Ціна
+                                    </Typography>
+                                    <Typography
+                                        variant={"h5"}>
+                                        {`$  ${round(product.price * (1 - (product.discount + (product.category.discount ? product.category.discount.percentage : 0)) / 100), 2)}`}
+                                    </Typography>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -100,7 +134,7 @@ class ProductPage extends Component {
                         justify={"center"}
                         direction={"column"}>
                         <Typography
-                            variant={"h4"}
+                            variant={"h5"}
                             color={"secondary"}
                             align={"center"}
                             style={{
