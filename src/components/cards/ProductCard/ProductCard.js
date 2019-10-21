@@ -12,6 +12,8 @@ import ConfirmDialog from "../../dialogs/ConfirmDialog/ConfirmDialog";
 import Slider from "@material-ui/core/Slider";
 import round from 'lodash.round';
 import {Link} from "react-router-dom";
+import {getProductRating} from "../../../utils/productUtils";
+import {Rating} from "@material-ui/lab";
 
 class ProductCard extends Component {
     state = {
@@ -182,6 +184,8 @@ class ProductCard extends Component {
 
     render() {
         const {product, theme} = this.props;
+        const rating = getProductRating(product);
+
         return (
             <Link
                 to={`/product-page/${product.id}`}
@@ -235,6 +239,17 @@ class ProductCard extends Component {
                             {product.description}
                         </Typography>
 
+                        <Grid
+                            container
+                            justify={"center"}>
+                            {rating !== null
+                            && <Rating
+                                readOnly
+                                size={"small"}
+                                precision={0.5}
+                                value={getProductRating(product)}
+                            />}
+                        </Grid>
                     </Grid>
                     {this.props.isUserLogged
                     && this.props.showAdminControls

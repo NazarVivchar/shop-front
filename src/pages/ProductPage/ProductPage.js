@@ -5,6 +5,8 @@ import round from "lodash.round";
 import Typography from "@material-ui/core/Typography";
 import CommentsList from "../../components/Lists/CommentsList/CommentsList";
 import CommentFormCard from "../../components/cards/CommentFormCard/CommentFormCardContainer";
+import {Rating} from '@material-ui/lab';
+import {getProductRating} from "../../utils/productUtils";
 
 class ProductPage extends Component {
     componentDidMount() {
@@ -124,6 +126,19 @@ class ProductPage extends Component {
                                         variant={"h5"}>
                                         {`$  ${round(product.price * (1 - (product.discount + (product.category.discount ? product.category.discount.percentage : 0)) / 100), 2)}`}
                                     </Typography>
+                                </Grid>
+                                <Grid container direction={"row"} justify={"space-between"}>
+                                    <Typography
+                                        variant={"h5"}
+                                        color={"secondary"}>
+                                        Оцінка
+                                    </Typography>
+                                    <Rating
+                                        readOnly
+                                        size={"large"}
+                                        precision={0.5}
+                                        value={getProductRating(product)}
+                                    />
                                 </Grid>
                             </Grid>
                         </Grid>

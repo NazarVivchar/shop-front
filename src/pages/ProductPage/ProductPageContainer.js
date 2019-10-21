@@ -8,16 +8,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     };
 
 
-const saveComment = product => (name, surname, commentText) => {
+const saveComment = product => comment => {
     dispatch(updateProduct({
         ...product,
         comments: [
             ...product.comments,
-            {
-                name,
-                surname,
-                commentText
-            }
+            comment
         ]
     }))};
 

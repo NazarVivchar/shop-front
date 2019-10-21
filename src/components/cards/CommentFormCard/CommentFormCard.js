@@ -5,24 +5,29 @@ import "./CommentFormCard.scss";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import {Rating} from '@material-ui/lab';
 
 class CommentFormCard extends Component {
 
     state = {
         name: this.props.name,
         surname: this.props.surname,
-        commentText: ""
+        commentText: "",
+        rating: null,
     };
 
     saveComment = () => {
         const {name, surname, commentText} = this.state;
+        const comment = {
+            name: this.state.name,
+            surname: this.state.surname,
+            commentText: this.state.commentText,
+            rating: this.state.rating
+        };
+
         if (name && surname && commentText
             && name.length && surname.length && commentText.length) {
-            this.props.saveComment(
-                this.state.name,
-                this.state.surname,
-                this.state.commentText
-            )
+            this.props.saveComment(comment)
         }
     };
 
@@ -31,6 +36,12 @@ class CommentFormCard extends Component {
             ...this.state,
             [event.target.getAttribute("name")]: event.target.value,
         });
+    };
+
+    handleRatingChange = (event, value) => {
+        this.setState({
+            rating: value
+        })
     };
 
     render() {
@@ -70,17 +81,21 @@ class CommentFormCard extends Component {
                         onChange={this.handleChange}
                         style={{marginLeft: theme.spacing(8)}}/>
                 </Grid>
-                <Grid>
-                    <TextField
-                        name="commentText"
-                        label="Коментар"
-                        margin="normal"
-                        fullWidth
-                        multiline
-                        rows="4"
-                        value={this.state.commentText}
-                        onChange={this.handleChange}/>
-                </Grid>
+                <Rating
+                    name="rating"
+                    precision={0.5}
+                    value={this.state.rating}
+                    onChange={this.handleRatingChange}
+                />
+                <TextField
+                    name="commentText"
+                    label="Коментар"
+                    margin="normal"
+                    fullWidth
+                    multiline
+                    rows="4"
+                    value={this.state.commentText}
+                    onChange={this.handleChange}/>
                 <Grid
                     container
                     alignItems={"center"}

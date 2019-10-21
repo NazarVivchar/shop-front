@@ -3,6 +3,7 @@ import {Grid} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import withTheme from "@material-ui/core/styles/withTheme";
 import "./CommentCard.scss";
+import {Rating} from '@material-ui/lab';
 
 class CommentCard extends Component {
     render() {
@@ -36,6 +37,11 @@ class CommentCard extends Component {
                         {comment.surname}
                     </Typography>
                 </Grid>
+                <Rating
+                    readOnly
+                    precision={0.5}
+                    value={comment.rating}
+                />
                 <Grid>
                     <Typography
                         variant={"h5"}
