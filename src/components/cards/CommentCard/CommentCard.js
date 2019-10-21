@@ -41,7 +41,9 @@ class CommentCard extends Component {
                     readOnly
                     precision={0.5}
                     value={comment.rating}
-                />
+                    style={{
+                        padding: theme.spacing(2),
+                    }}/>
                 <Grid>
                     <Typography
                         variant={"h5"}

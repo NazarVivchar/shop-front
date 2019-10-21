@@ -3,7 +3,7 @@ import {productsActionTypes} from '../actions/productsActions/productsActions';
 const initialState = {
     products: [],
     start: 1,
-    limit: 8,
+    limit: 10,
     total: 0,
     isLoading: true,
 };

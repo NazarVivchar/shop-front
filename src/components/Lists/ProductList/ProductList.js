@@ -8,7 +8,7 @@ import Paginator from "../../paginator/Paginator";
 class productList extends Component {
     state = {
         selectedPage: 1,
-        step: 8
+        step: 10
     };
 
     componentDidMount() {

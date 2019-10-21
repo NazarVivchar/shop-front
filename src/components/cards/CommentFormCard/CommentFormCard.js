@@ -86,6 +86,7 @@ class CommentFormCard extends Component {
                     precision={0.5}
                     value={this.state.rating}
                     onChange={this.handleRatingChange}
+                    style={{marginTop: theme.spacing(3)}}
                 />
                 <TextField
                     name="commentText"
